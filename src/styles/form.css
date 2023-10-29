@@ -1,0 +1,93 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('C:\Client-local\horrible\src\pexels-james-lee-4450181.jpg');
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+.register-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 40px;
+    border: 2px solid #9b852c;
+    border-radius: 20px;
+    background-color: rgba(48, 22, 4, 0.714); 
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #666;
+    color: #fff;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+.register-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 32.5%;
+    width: 140px;
+    margin-bottom: 10px;
+
+}
+
+.register-button:hover {
+    background-color: #c0392b;
+}
+
+.login-note {
+    margin-top: 16px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.login-note a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.login-note a:hover {
+    text-decoration: underline;
+}
+.headline{
+    text-align: center;
+}
+
+/* form.css */
+.form__password {
+    position: relative;
+  }
+
+  
+.form__eye {
+    position: absolute;
+    left: 99%;
+    top: 50%;
+    right: 1px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  
