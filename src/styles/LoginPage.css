@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('C:\Client-local\horrible\src\pexels-james-lee-4450181.jpg');
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 2px solid #9b852c;
+  border-radius: 20px;
+  background-color: rgba(48, 22, 4, 0.714); 
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #666;
+  color: #fff;
+}
+
+.login-button {
+  background-color: #2ecc71;
+  color: white;
+  padding: 10px 15px;
+  margin-left: 35%;
+  border: none;
+  border-radius: 4px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #27ae60;
+}
+
+.register-note {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.register-note a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.register-note a:hover {
+  text-decoration: underline;
+}
+
