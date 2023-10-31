@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('C:\Client-local\horrible\src\pexels-james-lee-4450181.jpg');
+    background-image: url('../pexels-james-lee-4450181.jpg');
     background-size: cover;
     font-family: Arial, sans-serif;
     color: #fff;
@@ -75,7 +75,6 @@ input {
     text-align: center;
 }
 
-/* form.css */
 .form__password {
     position: relative;
   }
