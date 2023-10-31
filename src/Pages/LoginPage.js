@@ -22,7 +22,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-container">
-      <h2>T&S Vova</h2>
+      <h2>T&S Banking</h2>
       <form>
         <label>
           Номер телефону:
