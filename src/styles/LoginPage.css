@@ -33,7 +33,7 @@ input {
   border: 1px solid #555;
   border-radius: 4px;
   background-color: #666;
-  color: #fff;
+  color: #f0f0f0;
 }
 
 .login-button {
@@ -57,7 +57,7 @@ input {
 }
 
 .register-note a {
-  color: #3498db;
+  color: #3da1e9;
   text-decoration: none;
 }
 
