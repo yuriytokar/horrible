@@ -34,7 +34,7 @@ const RegisterPage = () => {
       axios.post('http://localhost:8000/users', formData)
       .then(result => {
         console.log(result);
-        navigate('/login');
+        navigate('/');
       })
       .catch(err => console.log(err));
 
@@ -75,7 +75,7 @@ const RegisterPage = () => {
         </button>
       </form>
       <p className="login-note">
-        Вже маєте акаунт? <Link to="/login">Увійдіть</Link>
+        Вже маєте акаунт? <Link to="/">Увійдіть</Link>
       </p>
       <span className="text-danger">
         {errors.phone && `${errors.phone}! `} {errors.password && `${errors.password}! `}
