@@ -3,6 +3,7 @@ import '../styles/form.css';
 import { Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ const RegisterPage = () => {
   });
   const [errors, setErrors] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     let validationErrors = {};
@@ -31,8 +32,12 @@ const RegisterPage = () => {
 
     if (Object.keys(validationErrors).length === 0) {
       axios.post('http://localhost:8000/users', formData)
-      .then(result => console.log(result))
-      .catch(err => console.log(err))
+      .then(result => {
+        console.log(result);
+        navigate('/login');
+      })
+      .catch(err => console.log(err));
+
     }
   };
 
