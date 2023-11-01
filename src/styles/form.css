@@ -7,7 +7,10 @@ body {
     font-family: Arial, sans-serif;
     color: #fff;
 }
-
+.text-danger{
+    color: #c11b1b;
+    font-size: large;
+  }
 .register-container {
     max-width: 400px;
     margin: 100px auto;

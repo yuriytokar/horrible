@@ -20,7 +20,10 @@ body {
   align-items: center;
   justify-content: center; 
 }
-
+.text-danger{
+  color: #c11b1b;
+  font-size: large;
+}
 label {
   display: block;
   margin-bottom: 8px;

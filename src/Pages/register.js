@@ -75,10 +75,10 @@ const RegisterPage = () => {
         </button>
       </form>
       <p className="login-note">
-        Вже маєте акаунт? <Link to="/">Увійдіть</Link>
+        Вже маєте акаунт? <Link to="/login">Увійдіть</Link>
       </p>
       <span className="text-danger">
-        {errors.phone && `${errors.phone}; `} {errors.password && errors.password}
+        {errors.phone && `${errors.phone}! `} {errors.password && `${errors.password}! `}
       </span>
     </div>
   );
