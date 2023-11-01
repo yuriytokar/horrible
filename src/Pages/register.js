@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../styles/form.css';
 import { Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import axios from 'axios';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,9 @@ const RegisterPage = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log(formData);
+      axios.post('http://localhost:8000/users', formData)
+      .then(result => console.log(result))
+      .catch(err => console.log(err))
     }
   };
 
