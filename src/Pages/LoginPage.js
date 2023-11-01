@@ -16,6 +16,11 @@ const LoginPage = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
+  let actions = valid;
+  if(actions === 'wqrwqrqwr'){
+    console.log('hehe, it happaned')
+    
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     let validationErrors = {};
@@ -53,6 +58,7 @@ const LoginPage = () => {
     setValid(isvalid)
   })
   .catch(err => console.log(err));
+  return null;
   };
 
   return (
