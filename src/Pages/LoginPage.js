@@ -19,7 +19,7 @@ const LoginPage = () => {
   let actions = valid;
   if(actions === 'wqrwqrqwr'){
     console.log('hehe, it happaned')
-    
+
   }
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,12 +53,13 @@ const LoginPage = () => {
           validationErrors.password = 'Невірний пароль';          
         }
       }
+      return null;
     })
     setErrors(validationErrors)
     setValid(isvalid)
   })
   .catch(err => console.log(err));
-  return null;
+  
   };
 
   return (
