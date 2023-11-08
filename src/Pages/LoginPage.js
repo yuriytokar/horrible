@@ -47,7 +47,11 @@ const LoginPage = () => {
     result.data.map(user => {
       if (user.phone === formData.phone) {
         if (user.password === formData.password) {
-          navigate('/home')
+          if (user.blocked) {
+            navigate('/BlockedPage')
+          } else {
+            navigate('/home')
+          }
         } else {
           isvalid = false;
           validationErrors.password = 'Невірний пароль';          

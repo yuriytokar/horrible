@@ -3,52 +3,72 @@
     {
       "phone": "555555555555",
       "password": "ffffffffffffffffff",
-      "id": 1
+      "id": 1,
+      "blocked": false,
+      "access": "user"
     },
     {
       "phone": "666666666666",
       "password": "ііііііііііііііііі",
-      "id": 2
+      "id": 2,
+      "blocked": false,
+      "access": "user"
     },
     {
       "phone": "999999999999",
       "password": "5555555555555555555",
-      "id": 3
+      "id": 3,
+      "blocked": false,
+      "access": "user"
     },
     {
       "phone": "9999999999988888",
       "password": "88888888888888888888888",
-      "id": 4
+      "id": 4,
+      "blocked": false,
+      "access": "user"
     },
     {
       "phone": "0000000111111111",
       "password": "8787878787878787878",
-      "id": 5
+      "id": 5,
+      "blocked": false,
+      "access": "user"
     },
     {
       "phone": "595959595955",
       "password": "959595595",
-      "id": 6
+      "id": 6,
+      "blocked": false,
+      "access": "user"
     },
     {
       "phone": "777888999000",
       "password": "11111111111111111111",
-      "id": 7
+      "id": 7,
+      "blocked": false,
+      "access": "user"
     },
     {
       "phone": "0972114554",
       "password": "123456789",
-      "id": 8
+      "id": 8,
+      "blocked": false,
+      "access": "user"
     },
     {
       "phone": "0972889904",
       "password": "123456789",
-      "id": 9
+      "id": 9,
+      "blocked": false,
+      "access": "user"
     },
     {
       "phone": "0123456789",
       "password": "1234567",
-      "id": 10
+      "id": 10,
+      "blocked": false,
+      "access": "user"
     }
   ]
 }
