@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .page {
+    height: 100px;
+    width: 500px;
+    border: 2px solid #9b852c;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: rgba(48, 22, 4, 0.714);
+    margin: 5px;
+  }
+
+  .text {
+    text-align: center;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: blue;
+  }
+  
