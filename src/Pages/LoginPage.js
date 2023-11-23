@@ -80,7 +80,7 @@ const LoginPage = () => {
         </select>
       </div>
 
-      <h2>{selectedLanguage === 'en' ? 'T&S' : 'ТаC'}</h2>
+      <h2>T&S</h2>
       <form onSubmit={handleSubmit}>
         <label>
           {selectedLanguage === 'en' ? 'Phone Number:' : 'Номер телефону:'}

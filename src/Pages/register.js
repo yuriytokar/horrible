@@ -12,43 +12,60 @@ const RegisterPage = () => {
   });
   const [errors, setErrors] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('en'); // Додана стейт-змінна для відстеження обраної мови
   const navigate = useNavigate();
+
+  const handleLanguageChange = (e) => {
+    const language = e.target.value;
+    setSelectedLanguage(language);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let validationErrors = {};
 
     if (formData.phone === '' || formData.phone === null) {
-      validationErrors.phone = 'Введіть номер телефону';
+      validationErrors.phone = selectedLanguage === 'en' ? 'Enter your phone number' : 'Введіть номер телефону';
     } else if (formData.phone.length <= 9) {
-      validationErrors.phone = 'Неіснуючий номер телефону';
+      validationErrors.phone = selectedLanguage === 'en' ? 'Invalid phone number' : 'Неіснуючий номер телефону';
     }
+
     if (formData.password === '' || formData.password === null) {
-      validationErrors.password = 'Введіть пароль';
+      validationErrors.password = selectedLanguage === 'en' ? 'Enter your password' : 'Введіть пароль';
     } else if (formData.password.length < 6) {
-      validationErrors.password = 'Занадто короткий пароль';
+      validationErrors.password = selectedLanguage === 'en' ? 'Password is too short' : 'Занадто короткий пароль';
     }
 
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
       axios.post('http://localhost:8000/users', formData)
-      .then(result => {
-        console.log(result);
-        navigate('/');
-      })
-      .catch(err => console.log(err));
-
+        .then(result => {
+          console.log(result);
+          navigate('/');
+        })
+        .catch(err => console.log(err));
     }
   };
 
   return (
     <div className="register-container">
-      <h2 className="headline">T&S Banking - Реєстрація</h2>
+      <div className="language-selector">
+        <label htmlFor="language">Select language:</label>
+        <select id="language" onChange={handleLanguageChange} value={selectedLanguage}>
+          <option value="en">English</option>
+          <option value="uk">Українська</option>
+        </select>
+      </div>
+
+      <h2 className="headline">
+        {selectedLanguage === 'en' ? 'T&S Banking - Registration' : 'T&S Банкінг - Реєстрація'}
+      </h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Номер телефону:
+          {selectedLanguage === 'en' ? 'Phone Number:' : 'Номер телефону:'}
           <input
-            placeholder="Введіть свій номер телефону"
+            placeholder={selectedLanguage === 'en' ? 'Enter your phone number' : 'Введіть свій номер телефону'}
             type="text"
             onChange={(event) =>
               setFormData({ ...formData, phone: event.target.value })
@@ -57,9 +74,9 @@ const RegisterPage = () => {
         </label>
         <br />
         <label className="form__password">
-          Пароль:
+          {selectedLanguage === 'en' ? 'Password:' : 'Пароль:'}
           <input
-            placeholder="Вигадайте надійний пароль"
+            placeholder={selectedLanguage === 'en' ? 'Choose a strong password' : 'Вигадайте надійний пароль'}
             type={isPasswordVisible ? 'text' : 'password'}
             onChange={(event) =>
               setFormData({ ...formData, password: event.target.value })
@@ -71,11 +88,12 @@ const RegisterPage = () => {
         </label>
         <br />
         <button type="submit" className="register-button">
-          Зареєструватися
+          {selectedLanguage === 'en' ? 'Register' : 'Зареєструватися'}
         </button>
       </form>
       <p className="login-note">
-        Вже маєте акаунт? <Link to="/">Увійдіть</Link>
+        {selectedLanguage === 'en' ? 'Already have an account?' : 'Вже маєте акаунт?'}{' '}
+        <Link to="/">{selectedLanguage === 'en' ? 'Log In' : 'Увійдіть'}</Link>
       </p>
       <span className="text-danger">
         {errors.phone && `${errors.phone}! `} {errors.password && `${errors.password}! `}
