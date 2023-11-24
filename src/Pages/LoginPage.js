@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({});
   const [valid, setValid] = useState(true);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('en'); // Додана стейт-змінна для відстеження обраної мови
+  const [selectedLanguage, setSelectedLanguage] = useState('ua'); // Додана стейт-змінна для відстеження обраної мови
   const navigate = useNavigate();
 
   let actions = valid;
@@ -75,8 +75,8 @@ const LoginPage = () => {
       <div className="language-selector">
         <label htmlFor="language">Select language:</label>
         <select id="language" onChange={handleLanguageChange} value={selectedLanguage}>
-          <option value="en">English</option>
-          <option value="uk">Українська</option>
+          <option value="en">EN</option>
+          <option value="ua">UA</option>
         </select>
       </div>
 

@@ -7,6 +7,17 @@ body {
   color: #fff;
 }
 
+.language-selector {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.language-selector label {
+  margin-right: 8px;
+}
+
+
 .login-container {
   max-width: 400px;
   margin: 100px auto;
