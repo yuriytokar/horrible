@@ -12,7 +12,7 @@ const RegisterPage = () => {
   });
   const [errors, setErrors] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('UA'); // Додана стейт-змінна для відстеження обраної мови
+  const [selectedLanguage, setSelectedLanguage] = useState('ua'); // Додана стейт-змінна для відстеження обраної мови
   const navigate = useNavigate();
 
   const handleLanguageChange = (e) => {
@@ -51,7 +51,6 @@ const RegisterPage = () => {
   return (
     <div className="register-container">
       <div className="language-selector">
-        <label htmlFor="language">Select language:</label>
         <select id="language" onChange={handleLanguageChange} value={selectedLanguage}>
           <option value="en">EN</option>
           <option value="ua">UA</option>
