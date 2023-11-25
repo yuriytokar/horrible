@@ -73,7 +73,6 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <div className="language-selector">
-        <label htmlFor="language">Select language:</label>
         <select id="language" onChange={handleLanguageChange} value={selectedLanguage}>
           <option value="en">EN</option>
           <option value="ua">UA</option>
