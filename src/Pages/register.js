@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/form.css';
 import { Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
@@ -12,13 +12,34 @@ const RegisterPage = () => {
   });
   const [errors, setErrors] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('ua'); // Додана стейт-змінна для відстеження обраної мови
+  const [selectedLanguage, setSelectedLanguage] = useState('ua');
   const navigate = useNavigate();
+
+  // -------------------------------------------------
+  const saveLanguageToStorage = (language) => {
+    localStorage.setItem('selectedLanguage', language);
+  };
+
+  const getLanguageFromStorage = () => {
+    return localStorage.getItem('selectedLanguage') || 'ua';
+  };
 
   const handleLanguageChange = (e) => {
     const language = e.target.value;
     setSelectedLanguage(language);
+    saveLanguageToStorage(language);
   };
+
+  const setInitialLanguage = () => {
+    const storedLanguage = getLanguageFromStorage();
+    setSelectedLanguage(storedLanguage);
+  };
+
+  useEffect(() => {
+    setInitialLanguage();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // -------------------------------------------------
 
   const handleSubmit = (e) => {
     e.preventDefault();

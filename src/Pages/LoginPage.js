@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/LoginPage.css';
 import { Link } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({});
   const [valid, setValid] = useState(true);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('ua'); // Додана стейт-змінна для відстеження обраної мови
+  const [selectedLanguage, setSelectedLanguage] = useState('ua');
   const navigate = useNavigate();
 
   let actions = valid;
@@ -21,11 +21,30 @@ const LoginPage = () => {
     console.log('hehe, it happaned')
 
   }
+  // -------------------------------------------------
+  const saveLanguageToStorage = (language) => {
+    localStorage.setItem('selectedLanguage', language);
+  };
+
+  const getLanguageFromStorage = () => {
+    return localStorage.getItem('selectedLanguage') || 'ua';
+  };
 
   const handleLanguageChange = (e) => {
     const language = e.target.value;
     setSelectedLanguage(language);
+    saveLanguageToStorage(language);
   };
+
+  const setInitialLanguage = () => {
+    const storedLanguage = getLanguageFromStorage();
+    setSelectedLanguage(storedLanguage);
+  };
+
+  useEffect(() => {
+    setInitialLanguage(); // eslint-disable-next-line
+  }, []);
+  // -------------------------------------------------
 
   const handleSubmit = (e) => {
     e.preventDefault();
