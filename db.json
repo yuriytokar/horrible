@@ -1,4 +1,42 @@
 {
+  "translations": {
+    "en": {
+      "phonePlaceholder": "Enter your phone number",
+      "passwordPlaceholder": "Enter your password",
+      "loginButton": "Log In",
+      "notRegistered": "Not registered?",
+      "registerNow": "Register now",
+      "invalidPhone": "Invalid phone number",
+      "invalidCredentials": "Invalid credentials",
+      "incorrectPassword": "Incorrect password",
+      "blockedUser": "Your account is blocked. Please contact support.",
+      "registerHeadline": "T&S Banking - Registration",
+      "enterPhoneNumber": "Enter your phone number",
+      "chooseStrongPassword": "Choose a strong password",
+      "registerButton": "Register",
+      "alreadyHaveAccount": "Already have an account?",
+      "logIn": "Log In",
+      "passwordShort": "Password is too short"
+    },
+    "ua": {
+      "phonePlaceholder": "Введіть номер телефону",
+      "passwordPlaceholder": "Введіть пароль",
+      "loginButton": "Увійти",
+      "notRegistered": "Ще не зареєстровані?",
+      "registerNow": "Зареєструйтесь",
+      "invalidPhone": "Неіснуючий номер телефону",
+      "invalidCredentials": "Введено хибні дані",
+      "incorrectPassword": "Невірний пароль",
+      "blockedUser": "Ваш обліковий запис заблоковано. Будь ласка, зв'яжіться з підтримкою.",
+      "registerHeadline": "T&S Банкінг - Реєстрація",
+      "enterPhoneNumber": "Введіть свій номер телефону",
+      "chooseStrongPassword": "Вигадайте надійний пароль",
+      "registerButton": "Зареєструватися",
+      "alreadyHaveAccount": "Вже маєте акаунт?",
+      "logIn": "Увійдіть",
+      "passwordShort": "Занадто короткий пароль"
+    }
+  },
   "users": [
     {
       "phone": "555555555555",

@@ -12,6 +12,7 @@ const RegisterPage = () => {
   });
   const [errors, setErrors] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [translations, setTranslations] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState('ua');
   const navigate = useNavigate();
 
@@ -37,8 +38,13 @@ const RegisterPage = () => {
 
   useEffect(() => {
     setInitialLanguage();
+    axios.get('http://localhost:8000/db')
+      .then(result => {
+        const translations = result.data.translations;
+        setTranslations(translations);
+      })
+      .catch(err => console.log(err));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   // -------------------------------------------------
 
   const handleSubmit = (e) => {
@@ -46,15 +52,15 @@ const RegisterPage = () => {
     let validationErrors = {};
 
     if (formData.phone === '' || formData.phone === null) {
-      validationErrors.phone = selectedLanguage === 'en' ? 'Enter your phone number' : 'Введіть номер телефону';
+      validationErrors.phone = translations[selectedLanguage].phonePlaceholder;
     } else if (formData.phone.length <= 9) {
-      validationErrors.phone = selectedLanguage === 'en' ? 'Invalid phone number' : 'Неіснуючий номер телефону';
+      validationErrors.phone = translations[selectedLanguage].invalidPhone;
     }
 
     if (formData.password === '' || formData.password === null) {
-      validationErrors.password = selectedLanguage === 'en' ? 'Enter your password' : 'Введіть пароль';
+      validationErrors.password = translations[selectedLanguage].passwordPlaceholder;
     } else if (formData.password.length < 6) {
-      validationErrors.password = selectedLanguage === 'en' ? 'Password is too short' : 'Занадто короткий пароль';
+      validationErrors.password = translations[selectedLanguage].passwordShort;
     }
 
     setErrors(validationErrors);
@@ -79,13 +85,13 @@ const RegisterPage = () => {
       </div>
 
       <h2 className="headline">
-        {selectedLanguage === 'en' ? 'T&S Banking - Registration' : 'T&S Банкінг - Реєстрація'}
+        {translations[selectedLanguage]?.registerHeadline}
       </h2>
       <form onSubmit={handleSubmit}>
         <label>
-          {selectedLanguage === 'en' ? 'Phone Number:' : 'Номер телефону:'}
+          {translations[selectedLanguage]?.phonePlaceholder}
           <input
-            placeholder={selectedLanguage === 'en' ? 'Enter your phone number' : 'Введіть свій номер телефону'}
+            placeholder={translations[selectedLanguage]?.enterPhoneNumber}
             type="text"
             onChange={(event) =>
               setFormData({ ...formData, phone: event.target.value })
@@ -94,9 +100,9 @@ const RegisterPage = () => {
         </label>
         <br />
         <label className="form__password">
-          {selectedLanguage === 'en' ? 'Password:' : 'Пароль:'}
+          {translations[selectedLanguage]?.passwordPlaceholder}
           <input
-            placeholder={selectedLanguage === 'en' ? 'Choose a strong password' : 'Вигадайте надійний пароль'}
+            placeholder={translations[selectedLanguage]?.chooseStrongPassword}
             type={isPasswordVisible ? 'text' : 'password'}
             onChange={(event) =>
               setFormData({ ...formData, password: event.target.value })
@@ -108,12 +114,12 @@ const RegisterPage = () => {
         </label>
         <br />
         <button type="submit" className="register-button">
-          {selectedLanguage === 'en' ? 'Register' : 'Зареєструватися'}
+          {translations[selectedLanguage]?.registerButton}
         </button>
       </form>
       <p className="login-note">
-        {selectedLanguage === 'en' ? 'Already have an account?' : 'Вже маєте акаунт?'}{' '}
-        <Link to="/">{selectedLanguage === 'en' ? 'Log In' : 'Увійдіть'}</Link>
+        {translations[selectedLanguage]?.alreadyHaveAccount}{' '}
+        <Link to="/">{translations[selectedLanguage]?.logIn}</Link>
       </p>
       <span className="text-danger">
         {errors.phone && `${errors.phone}! `} {errors.password && `${errors.password}! `}
