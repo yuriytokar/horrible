@@ -29,7 +29,7 @@ const LoginPage = () => {
   };
 
   const getLanguageFromStorage = () => {
-    return localStorage.getItem('selectedLanguage') || 'en'; // за замовчуванням англійська
+    return localStorage.getItem('selectedLanguage') || 'en';
   };
 
   const handleLanguageChange = (e) => {
@@ -45,7 +45,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     setInitialLanguage();
-    // Завантажуємо переклади з файлу db.json
+    
     axios.get('http://localhost:8000/db')
       .then(result => {
         setTranslations(result.data.translations);
