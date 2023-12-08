@@ -43,7 +43,7 @@
       "password": "ffffffffffffffffff",
       "id": 1,
       "access": "user",
-      "blocked": true
+      "blocked": false
     },
     {
       "phone": "666666666666",
@@ -55,7 +55,8 @@
       "phone": "999999999999",
       "password": "5555555555555555555",
       "id": 3,
-      "access": "user"
+      "access": "user",
+      "blocked": false
     },
     {
       "phone": "9999999999988888",
