@@ -49,7 +49,6 @@ const AdminPage = () => {
       setUsers(users.map(user => (user.id === updatedUser.id ? updatedUser : user)));
       setCurrentUser(updatedUser);
 
-      // Оновлюємо заблокованих користувачів
       if (updatedUser.blocked) {
         setBlockedUsers([...blockedUsers, updatedUser]);
       } else {

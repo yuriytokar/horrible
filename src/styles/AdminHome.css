@@ -1,8 +1,29 @@
 .admin-page {
+  display: flex;
+}
+
+.blocked-users {
   /*display: flex;
   flex-direction: column;
   align-items: center;*/
+  flex: 1;
   max-width: 350px;
+  height: 500px;
+  margin: 0 auto;
+  margin-top: 50px;
+  border: 2px solid #9b852c;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: rgba(48, 22, 4, 0.714);
+}
+
+.input-user {
+    /*display: flex;
+  flex-direction: column;
+  align-items: center;*/
+  flex: 1;
+  max-width: 350px;
+  max-height: 250px;
   margin: 0 auto;
   margin-top: 50px;
   border: 2px solid #9b852c;
