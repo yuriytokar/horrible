@@ -50,7 +50,7 @@ const LoginPage = () => {
       .then(result => {
         setTranslations(result.data.translations);
       })
-      .catch(err => console.log(err)); // eslint-disable-next-line
+      .catch(err => console.log(err)); 
   }, []);
 
   const handleSubmit = (e) => {
@@ -81,7 +81,7 @@ const LoginPage = () => {
               if (user.blocked) {
                 navigate('/BlockedPage');
               } else {
-                navigate('/home');
+                navigate('/payment');
               }
             } else {
               isvalid = false;

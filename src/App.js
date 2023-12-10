@@ -6,6 +6,7 @@ import LoginPage from './Pages/LoginPage';
 import Register from './Pages/register'; 
 import Home from './Pages/home';
 import './styles/App.css'; 
+import PaymentForm from './Pages/PaymentForm';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/BlockedPage" element={<BlockedPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/payment" element={<PaymentForm/>} />
         <Route path="/" element={<LoginPage />} />
       </Routes>
     </Router>

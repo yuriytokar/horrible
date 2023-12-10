@@ -10,13 +10,13 @@ const RegisterPage = () => {
     phone: '',
     password: '',
   });
+  
   const [errors, setErrors] = useState({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [translations, setTranslations] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState('ua');
   const navigate = useNavigate();
 
-  // -------------------------------------------------
   const saveLanguageToStorage = (language) => {
     localStorage.setItem('selectedLanguage', language);
   };
@@ -44,8 +44,7 @@ const RegisterPage = () => {
         setTranslations(translations);
       })
       .catch(err => console.log(err));
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  // -------------------------------------------------
+  }, []); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,10 +65,21 @@ const RegisterPage = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      axios.post('http://localhost:8000/users', formData)
+      axios.get(`http://localhost:8000/users?phone=${formData.phone}`)
         .then(result => {
-          console.log(result);
-          navigate('/');
+          if (result.data.length === 0) {
+            axios.post('http://localhost:8000/users', formData)
+              .then(result => {
+                console.log(result);
+                navigate('/');
+              })
+              .catch(err => console.log(err));
+          } else {
+            setErrors({
+              ...validationErrors,
+              phone: translations[selectedLanguage].phoneAlreadyExists,
+            });
+          }
         })
         .catch(err => console.log(err));
     }
