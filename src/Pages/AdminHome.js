@@ -8,13 +8,13 @@ const AdminPage = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [blockedUsers, setBlockedUsers] = useState([]);
   const [userFound, setUserFound] = useState(false);
+  const [expandedInputSection, setExpandedInputSection] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get('http://localhost:8000/users');
         setUsers(response.data);
-        // Отримуємо тільки заблокованих користувачів
         const blocked = response.data.filter(user => user.blocked);
         setBlockedUsers(blocked);
       } catch (error) {
@@ -37,8 +37,10 @@ const AdminPage = () => {
     if (foundUser) {
       setCurrentUser(foundUser);
       setUserFound(true);
+      setExpandedInputSection(true);
     } else {
       setUserFound(false);
+      setExpandedInputSection(false);
     }
   };
 
@@ -62,11 +64,17 @@ const AdminPage = () => {
     updateUser(updatedUser);
     setUsers(users.map(u => (u.id === updatedUser.id ? updatedUser : u)));
     setBlockedUsers(blockedUsers.filter(u => u.id !== updatedUser.id));
+
+    // Додано перевірку, чи оновлюється поточний користувач
+    if (currentUser && currentUser.id === updatedUser.id) {
+      setCurrentUser(updatedUser);
+    }
+    setUserFound(true);
   };
 
   return (
     <div className="admin-page">
-      <div className="input-user">
+      <div className={`input-user${expandedInputSection ? ' expanded' : ''}`}>
         <div className="input-section">
           <input
             type="tel"
@@ -78,6 +86,7 @@ const AdminPage = () => {
         </div>
         {userFound && currentUser ? (
           <div className="user-status">
+            <p>Name: {currentUser.card.name}</p>
             <p>Phone number: {currentUser.phone}</p>
             <p>Password: {currentUser.password}</p>
             <p>Status: {currentUser.blocked ? 'Blocked' : 'Not Blocked'}</p>
@@ -94,8 +103,10 @@ const AdminPage = () => {
         <ul>
           {blockedUsers.map((user) => (
             <li key={user.id}>
-              {user.phone} 
-              <button onClick={() => unblockUser(user)}>Unblock</button>
+              <div className="blocked-user-item">
+                <p>{user.card.name}</p>
+                <button onClick={() => unblockUser(user)}>Unblock</button>
+              </div>
             </li>
           ))}
         </ul>

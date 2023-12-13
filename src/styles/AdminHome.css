@@ -17,13 +17,27 @@
   background-color: rgba(48, 22, 4, 0.714);
 }
 
+.blocked-users h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blocked-user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
 .input-user {
     /*display: flex;
   flex-direction: column;
   align-items: center;*/
   flex: 1;
   max-width: 350px;
-  max-height: 250px;
+  height: 290px;
   margin: 0 auto;
   margin-top: 50px;
   border: 2px solid #9b852c;
