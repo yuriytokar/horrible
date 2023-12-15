@@ -61,7 +61,8 @@
         "expiry": "10/23",
         "cvc": "456",
         "name": "Jane Doe"
-      }
+      },
+      "blocked": false
     }
   ]
 }
