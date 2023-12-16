@@ -64,5 +64,27 @@
       },
       "blocked": false
     }
+  ],
+  "operations": [
+    {
+      "type": "transfer",
+      "amount": 0,
+      "count": 0
+    },
+    {
+      "type": "phone top-up",
+      "amount": 0,
+      "count": 0
+    },
+    {
+      "type": "deposit",
+      "amount": 0,
+      "count": 0
+    },
+    {
+      "type": "withdraw",
+      "amount": 0,
+      "count": 0
+    }
   ]
 }
