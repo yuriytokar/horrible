@@ -63,6 +63,17 @@
         "name": "Jane Doe"
       },
       "blocked": false
+    },
+    {
+      "phone": "012354678910",
+      "password": "абобабубабкакбп",
+      "id": 3,
+      "card": {
+        "number": "497567867876886",
+        "expiry": "10/23",
+        "cvc": "456",
+        "name": "Kerikal"
+      }
     }
   ]
 }

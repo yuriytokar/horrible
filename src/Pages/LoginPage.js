@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/LoginPage.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import '../styles/LoginPage.css';
+
 
 const LoginPage = () => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [formData, setFormData] = useState({
     phone: '',
     password: '',
   });
   const [errors, setErrors] = useState({});
-  const [valid, setValid] = useState(true);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [translations, setTranslations] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState('');
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
-
-  let actions = valid;
-  if(actions === 'wqrwqrqwr'){
-    console.log('hehe, it happaned')
-
-  }
 
   const saveLanguageToStorage = (language) => {
     localStorage.setItem('selectedLanguage', language);
@@ -45,55 +39,61 @@ const LoginPage = () => {
 
   useEffect(() => {
     setInitialLanguage();
-    
+
     axios.get('http://localhost:8000/db')
       .then(result => {
         setTranslations(result.data.translations);
       })
-      .catch(err => console.log(err)); 
+      .catch(err => console.log(err));
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSuccessfulLogin = (user) => {
+    setLoggedIn(true);
+    localStorage.setItem('isLoggedIn', 'true');
+    navigate('/payment', { state: { user } });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let validationErrors = {};
-    let isvalid = true;
+    let isValid = true;
 
     if (formData.phone === '' || formData.phone === null) {
-      isvalid = false;
+      isValid = false;
       validationErrors.phone = translations[selectedLanguage]?.invalidPhone || 'Enter your phone number';
     } else if (formData.phone.length <= 9) {
-      isvalid = false;
+      isValid = false;
       validationErrors.phone = translations[selectedLanguage]?.invalidPhone || 'Invalid phone number';
     }
 
     if (formData.password === '' || formData.password === null) {
-      isvalid = false;
+      isValid = false;
       validationErrors.password = translations[selectedLanguage]?.invalidCredentials || 'Enter your password';
     } else if (formData.phone.length > 9 && formData.password.length > 0) {
-      validationErrors.password = translations[selectedLanguage]?.invalidCredentials || "Invalid credentials";
+      validationErrors.password = translations[selectedLanguage]?.invalidCredentials || 'Invalid credentials';
     }
 
-    axios.get('http://localhost:8000/users')
-      .then(result => {
-        result.data.map(user => {
-          if (user.phone === formData.phone) {
-            if (user.password === formData.password) {
-              if (user.blocked) {
-                navigate('/BlockedPage');
-              } else {
-                navigate('/payment');
-              }
-            } else {
-              isvalid = false;
-              validationErrors.password = translations[selectedLanguage]?.incorrectPassword || 'Incorrect password';
-            }
+    if (isValid) {
+      try {
+        const response = await axios.get('http://localhost:8000/users');
+        const user = response.data.find(user => user.phone === formData.phone && user.password === formData.password);
+
+        if (user) {
+          if (user.blocked) {
+            navigate('/BlockedPage');
+          } else {
+            handleSuccessfulLogin(user);
           }
-          return null;
-        });
-        setErrors(validationErrors);
-        setValid(isvalid);
-      })
-      .catch(err => console.log(err));
+        } else {
+          isValid = false;
+          validationErrors.password = translations[selectedLanguage]?.incorrectPassword || 'Incorrect password';
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    setErrors(validationErrors);
   };
 
   return (
