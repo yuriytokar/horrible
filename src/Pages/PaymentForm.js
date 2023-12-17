@@ -3,6 +3,7 @@ import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import '../styles/PaymentForm.css';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 const PaymentForm = () => {
   const [state, setState] = useState({
@@ -18,7 +19,6 @@ const PaymentForm = () => {
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
-
     setState((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -28,11 +28,36 @@ const PaymentForm = () => {
 
   useEffect(() => {
     // Отримання даних користувача з файлу db.json
+    // Додайте власну логіку для отримання даних платежу тут
   }, []);
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    // логіка обробки платежу тут, використовуючи дані з state
+
+    // Перевірка, чи є авторизований користувач
+    if (!userData) {
+      console.error('User is not authenticated.');
+      return;
+    }
+
+    // Оновлення даних користувача в db.json
+    const updatedUserData = {
+      ...userData,
+      card: {
+        name: state.name,
+        number: state.number,
+        expiry: state.expiry,
+        cvc: state.cvc,
+      },
+    };
+
+    try {
+      // Оновлення даних користувача на сервері
+      await axios.put(`http://localhost:8000/users/${userData.id}`, updatedUserData);
+      console.log('User data updated successfully.');
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
   };
 
   return (
