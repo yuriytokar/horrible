@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import '../styles/DiagramPage.css';
 
 function DiagramPage() {
-  const [activeTab, setActiveTab] = useState('Statistics');
+  const [activeTab, setActiveTab] = useState('Diagram');
   const [operations, setOperations] = useState([]);
 
   useEffect(() => {
@@ -84,19 +85,25 @@ function DiagramPage() {
       )}
 
       {activeTab === 'Graphs' && (
-        <div>
-          {/* Вміст для вкладки Graphs */}
-          <h2>Content for Graphs</h2>
+        <div className="firstgraphs">
+            <LineChart width={600} height={300} data={operations}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="type" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            {/* Додаємо чотири секції графіка на основі полів used_money */}
+            <Line type="monotone" dataKey="used_money" name="Operations" stroke="#8884d8" />
+            </LineChart>
         </div>
       )}
-
+      
       {activeTab === 'Diagram' && (
         <div className='linediagram'>
           <div className='firstdiagram'>
-
           </div>
-          <div className='secconddiagram'>
-            
+          <div className='seconddiagram'>
+            {/* Додайте інші елементи або графіки для другої секції, якщо необхідно */}
           </div>
         </div>
       )}
