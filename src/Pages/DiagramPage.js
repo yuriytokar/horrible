@@ -45,7 +45,7 @@ function DiagramPage() {
               <h2>Transfer Statistics</h2>
               {operations.length > 0 && (
                 <>
-                  <p>Amount: {operations[0].amount}</p>
+                  <p>Used money: {operations[0].used_money}</p>
                   <p>Count: {operations[0].count}</p>
                 </>
               )}
@@ -54,7 +54,7 @@ function DiagramPage() {
               <h2>Top-up Statistics</h2>
               {operations.length > 1 && (
                 <>
-                  <p>Amount: {operations[1].amount}</p>
+                  <p>Used money: {operations[1].used_money}</p>
                   <p>Count: {operations[1].count}</p>
                 </>
               )}
@@ -65,7 +65,7 @@ function DiagramPage() {
               <h2>Deposit Statistics</h2>
               {operations.length > 2 && (
                 <>
-                  <p>Amount: {operations[2].amount}</p>
+                  <p>Used money: {operations[2].used_money}</p>
                   <p>Count: {operations[2].count}</p>
                 </>
               )}
@@ -74,7 +74,7 @@ function DiagramPage() {
               <h2>Withdraw Statistics</h2>
               {operations.length > 3 && (
                 <>
-                  <p>Amount: {operations[3].amount}</p>
+                  <p>Used money: {operations[3].used_money}</p>
                   <p>Count: {operations[3].count}</p>
                 </>
               )}
@@ -91,9 +91,13 @@ function DiagramPage() {
       )}
 
       {activeTab === 'Diagram' && (
-        <div>
-          {/* Вміст для вкладки Diagram */}
-          <h2>Content for Diagram</h2>
+        <div className='linediagram'>
+          <div className='firstdiagram'>
+
+          </div>
+          <div className='secconddiagram'>
+            
+          </div>
         </div>
       )}
     </div>

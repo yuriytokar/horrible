@@ -79,22 +79,22 @@
   "operations": [
     {
       "type": "transfer",
-      "amount": 1,
+      "used_money": 1111,
       "count": 11
     },
     {
       "type": "phone top-up",
-      "amount": 2,
+      "used_money": 2222,
       "count": 22
     },
     {
       "type": "deposit",
-      "amount": 3,
+      "used_money": 3333,
       "count": 33
     },
     {
       "type": "withdraw",
-      "amount": 4,
+      "used_money": 4444,
       "count": 44
     }
   ]
