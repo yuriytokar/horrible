@@ -43,30 +43,45 @@ function DiagramPage() {
           <div className="firstline">
             <div className="diagram-window transferStatistics">
               <h2>Transfer Statistics</h2>
-              <p>Amount: {operations[0].amount}</p>
-              <p>Count: {operations[0].count}</p>
+              {operations.length > 0 && (
+                <>
+                  <p>Amount: {operations[0].amount}</p>
+                  <p>Count: {operations[0].count}</p>
+                </>
+              )}
             </div>
             <div className="diagram-window top-upStatistics">
               <h2>Top-up Statistics</h2>
-              <p>Amount: {operations[1].amount}</p>
-              <p>Count: {operations[1].count}</p>
+              {operations.length > 1 && (
+                <>
+                  <p>Amount: {operations[1].amount}</p>
+                  <p>Count: {operations[1].count}</p>
+                </>
+              )}
             </div>
           </div>
           <div className="secondline">
             <div className="diagram-window depositStatistics">
               <h2>Deposit Statistics</h2>
-              <p>Amount: {operations[2].amount}</p>
-              <p>Count: {operations[2].count}</p>
+              {operations.length > 2 && (
+                <>
+                  <p>Amount: {operations[2].amount}</p>
+                  <p>Count: {operations[2].count}</p>
+                </>
+              )}
             </div>
             <div className="diagram-window withdrawStatistics">
               <h2>Withdraw Statistics</h2>
-              <p>Amount: {operations[3].amount}</p>
-              <p>Count: {operations[3].count}</p>
+              {operations.length > 3 && (
+                <>
+                  <p>Amount: {operations[3].amount}</p>
+                  <p>Count: {operations[3].count}</p>
+                </>
+              )}
             </div>
           </div>
         </div>
       )}
-
 
       {activeTab === 'Graphs' && (
         <div>

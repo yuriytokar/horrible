@@ -79,23 +79,23 @@
   "operations": [
     {
       "type": "transfer",
-      "amount": 0,
-      "count": 0
+      "amount": 1,
+      "count": 11
     },
     {
       "type": "phone top-up",
-      "amount": 0,
-      "count": 0
+      "amount": 2,
+      "count": 22
     },
     {
       "type": "deposit",
-      "amount": 0,
-      "count": 0
+      "amount": 3,
+      "count": 33
     },
     {
       "type": "withdraw",
-      "amount": 0,
-      "count": 0
+      "amount": 4,
+      "count": 44
     }
   ]
 }
