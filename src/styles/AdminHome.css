@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.admin-page p {
+  margin: 15px 0;
+}
+
 .blocked-users {
   /*display: flex;
   flex-direction: column;
@@ -95,8 +99,4 @@ button:hover {
 
 .user-status button:hover {
   background-color: #27ae60;
-}
-
-p {
-  margin: 15px 0;
 }
