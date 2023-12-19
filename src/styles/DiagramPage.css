@@ -19,7 +19,7 @@
   justify-content: center; /* Це центрує вкладки */
 }
 
-.mainDia li {
+.mainDia nav li {
   border: 2px solid #9b852c;
   border-radius: 10px;
   margin-right: 30px;
@@ -63,4 +63,22 @@
   color: #276918;
 }
 
+.linediagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstdiagram, .seconddiagram {
+  margin: 10px 100px;
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(110, 71, 44, 0.714);
+  border: 2px solid #9b852c;
+  border-radius: 10px;
+  width: 700px;
+  height: 400px; /* Set a fixed height for both diagrams */
+}
 
