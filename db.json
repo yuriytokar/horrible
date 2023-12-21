@@ -79,23 +79,27 @@
   "operations": [
     {
       "type": "transfer",
-      "used_money": 1111,
+      "used_money": 1100,
+      "money_earned": 155,
       "count": 11
     },
     {
       "type": "phone top-up",
-      "used_money": 2222,
+      "used_money": 2300,
+      "money_earned": 250,
       "count": 22
     },
     {
       "type": "deposit",
-      "used_money": 3333,
-      "count": 33
+      "used_money": 3200,
+      "money_earned": 360,
+      "count": 36
     },
     {
       "type": "withdraw",
-      "used_money": 4444,
-      "count": 44
+      "used_money": 4600,
+      "money_earned": 500,
+      "count": 48
     }
   ]
 }

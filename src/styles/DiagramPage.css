@@ -63,6 +63,34 @@
   color: #276918;
 }
 
+.linegraphs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstgraphs, .secondgraphs {
+  margin: 10px 45px;
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(157, 157, 157, 0.19);
+  border: 2px solid #9b852c;
+  border-radius: 10px;
+  width: 700px;
+  height: 500px; /* Set a fixed height for both diagrams */
+}
+
+.firstgraphs p, .secondgraphs p {
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+
 .linediagram {
   display: flex;
   align-items: center;
@@ -70,15 +98,19 @@
 }
 
 .firstdiagram, .seconddiagram {
-  margin: 10px 100px;
+  margin: 10px 45px;
   display: flex;
   flex-direction: column; /* Align items vertically */
   align-items: center;
   justify-content: center;
-  background-color: rgba(110, 71, 44, 0.714);
+  background-color: rgba(157, 157, 157, 0.19);
   border: 2px solid #9b852c;
   border-radius: 10px;
   width: 700px;
-  height: 400px; /* Set a fixed height for both diagrams */
+  height: 500px; /* Set a fixed height for both diagrams */
 }
 
+.firstdiagram p, .seconddiagram p{
+  margin: 0px;
+  font-size: 20px;
+}

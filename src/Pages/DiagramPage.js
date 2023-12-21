@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // eslint-disable-next-line
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { BarChart, Pie, PieChart, Bar, Sector, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import '../styles/DiagramPage.css';
 
 function DiagramPage() {
@@ -28,12 +28,34 @@ function DiagramPage() {
   if (operations.length === 0) {
     return <p>Loading...</p>; 
   }
+ 
+  const datagraphs01 = [
+    { name: operations[0].type, UM: operations[0].used_money},
+    { name: operations[1].type, UM: operations[1].used_money},
+    { name: operations[2].type, UM: operations[2].used_money},
+    { name: operations[3].type, UM: operations[3].used_money}
+  ];
 
-  const data01 = [
+  const datagraphs02 = [
+    { name: operations[0].type, Profitability: parseFloat(((operations[0].money_earned)/(operations[0].count)).toFixed(2)) },
+    { name: operations[1].type, Profitability: parseFloat(((operations[1].money_earned)/(operations[1].count)).toFixed(2)) },
+    { name: operations[2].type, Profitability: parseFloat(((operations[2].money_earned)/(operations[2].count)).toFixed(2)) },
+    { name: operations[3].type, Profitability: parseFloat(((operations[3].money_earned)/(operations[3].count)).toFixed(2)) },
+  ];
+
+
+  const datadiagram01 = [
     { name: operations[0].type, value: operations[0].used_money },
     { name: operations[1].type, value: operations[1].used_money },
     { name: operations[2].type, value: operations[2].used_money },
     { name: operations[3].type, value: operations[3].used_money },
+  ];
+
+  const datadiagram02 = [
+    { name: operations[0].type, value: parseFloat(((operations[0].money_earned)/(operations[0].count)).toFixed(2)) },
+    { name: operations[1].type, value: parseFloat(((operations[1].money_earned)/(operations[1].count)).toFixed(2)) },
+    { name: operations[2].type, value: parseFloat(((operations[2].money_earned)/(operations[2].count)).toFixed(2)) },
+    { name: operations[3].type, value: parseFloat(((operations[3].money_earned)/(operations[3].count)).toFixed(2)) },
   ];
 
   const renderActiveShape = (props) => {
@@ -147,28 +169,66 @@ function DiagramPage() {
         </div>
       )}
 
-      {activeTab === 'Graphs' && (
-        <div className="firstgraphs">
-            <LineChart width={600} height={300} data={operations}>
+      {activeTab === 'Graphs' && (     
+        <div className='linegraphs'>
+          <div className='firstgraphs'>
+          <p>The funds that have passed through operations.</p>
+            <ResponsiveContainer width="100%" height="70%">
+            <BarChart
+            width={500}
+            height={300}
+            data={datagraphs01}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="type" />
-            <YAxis />
+            <XAxis dataKey="name" tick={{ fill: "#fff" }}/>
+            <YAxis tick={{ fill: "#fff" }}/>
             <Tooltip />
             <Legend />
-            {/* Додаємо чотири секції графіка на основі полів used_money */}
-            <Line type="monotone" dataKey="used_money" name="Operations" stroke="#8884d8" />
-            </LineChart>
+            <Bar dataKey="UM" stackId="a" fill="#8884d8" barSize={50}/>
+            </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className='secondgraphs'>
+          <p>The funds that have passed through operations.</p>
+            <ResponsiveContainer width="100%" height="70%">
+            <BarChart
+            width={500}
+            height={300}
+            data={datagraphs02}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" tick={{ fill: "#fff" }}/>
+            <YAxis tick={{ fill: "#fff" }}/>
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="Profitability" stackId="a" fill="#9ACD32" barSize={50}/>
+            </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       )}
       
       {activeTab === 'Diagram' && (
         <div className='linediagram'>
           <div className='firstdiagram'>
+            <p>The ratio of funds that have passed through operations.</p>
             <PieChart width={600} height={400}>
               <Pie
                 activeIndex={activeIndex}
                 activeShape={renderActiveShape}
-                data={data01}
+                data={datadiagram01}
                 cx="50%"
                 cy="50%"
                 innerRadius={80}
@@ -180,15 +240,16 @@ function DiagramPage() {
             </PieChart>
           </div>
           <div className='seconddiagram'>
+            <p>The ratio of money earned by the bank per unit of operation.</p>
             <PieChart width={600} height={400}>
               <Pie
                 dataKey="value"
                 isAnimationActive={false}
-                data={data01}
+                data={datadiagram02}
                 cx="50%"
                 cy="50%"
                 outerRadius={120}
-                fill="#8884d8"
+                fill="#9ACD32"
                 label
               />
               <Tooltip />
