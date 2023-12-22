@@ -52,16 +52,29 @@
   border: 2px solid #9b852c;
   border-radius: 10px;
   padding: 15px;
-  background-color: rgba(48, 22, 4, 0.714);
+  background-color: rgba(157, 157, 157, 0.19);;
   color: #fff;
   width: 48%; /* Зменшено, щоб вмістився у дві рядки */
   text-align: center;
   margin: 10px 10px;
+  backdrop-filter: blur(10px); /* Розмиття */
 }
 
 .diagram-window h2 {
-  color: #276918;
+  color: #9ACD32;
 }
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-column,
+.right-column {
+  flex: 1;
+}
+
+
 
 .linegraphs {
   display: flex;
@@ -80,6 +93,7 @@
   border-radius: 10px;
   width: 700px;
   height: 500px; /* Set a fixed height for both diagrams */
+  backdrop-filter: blur(10px); /* Розмиття */
 }
 
 .firstgraphs p, .secondgraphs p {
@@ -108,6 +122,7 @@
   border-radius: 10px;
   width: 700px;
   height: 500px; /* Set a fixed height for both diagrams */
+  backdrop-filter: blur(10px); /* Розмиття */
 }
 
 .firstdiagram p, .seconddiagram p{

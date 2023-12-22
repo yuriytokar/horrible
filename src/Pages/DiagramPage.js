@@ -130,19 +130,31 @@ function DiagramPage() {
             <div className="diagram-window transferStatistics">
               <h2>Transfer Statistics</h2>
               {operations.length > 0 && (
-                <>
-                  <p>Used money: {operations[0].used_money}</p>
-                  <p>Count: {operations[0].count}</p>
-                </>
+                <div className="flex-container">
+                  <div className="left-column">
+                    <p>Used money: {operations[0].used_money}</p>
+                    <p>Count: {operations[0].count}</p>
+                  </div>
+                  <div className="right-column">
+                    <p>Money earned: {operations[0].money_earned}</p>
+                    <p>Profitability: {parseFloat(((operations[0].money_earned) / (operations[0].count)).toFixed(2))}</p>
+                  </div>
+                </div>
               )}
             </div>
             <div className="diagram-window top-upStatistics">
               <h2>Top-up Statistics</h2>
               {operations.length > 1 && (
-                <>
-                  <p>Used money: {operations[1].used_money}</p>
-                  <p>Count: {operations[1].count}</p>
-                </>
+                <div className="flex-container">
+                  <div className="left-column">
+                    <p>Used money: {operations[1].used_money}</p>
+                    <p>Count: {operations[1].count}</p>
+                  </div>
+                  <div className="right-column">
+                    <p>Money earned: {operations[1].money_earned}</p>
+                    <p>Profitability: {parseFloat(((operations[1].money_earned) / (operations[1].count)).toFixed(2))}</p>
+                  </div>
+                </div>
               )}
             </div>
           </div>
@@ -150,19 +162,31 @@ function DiagramPage() {
             <div className="diagram-window depositStatistics">
               <h2>Deposit Statistics</h2>
               {operations.length > 2 && (
-                <>
-                  <p>Used money: {operations[2].used_money}</p>
-                  <p>Count: {operations[2].count}</p>
-                </>
+                <div className="flex-container">
+                  <div className="left-column">
+                    <p>Used money: {operations[2].used_money}</p>
+                    <p>Count: {operations[2].count}</p>
+                  </div>
+                  <div className="right-column">
+                    <p>Money earned: {operations[2].money_earned}</p>
+                    <p>Profitability: {parseFloat(((operations[2].money_earned) / (operations[2].count)).toFixed(2))}</p>
+                  </div>
+              </div>
               )}
             </div>
             <div className="diagram-window withdrawStatistics">
               <h2>Withdraw Statistics</h2>
               {operations.length > 3 && (
-                <>
-                  <p>Used money: {operations[3].used_money}</p>
-                  <p>Count: {operations[3].count}</p>
-                </>
+                <div className="flex-container">
+                  <div className="left-column">
+                    <p>Used money: {operations[3].used_money}</p>
+                    <p>Count: {operations[3].count}</p>
+                  </div>
+                  <div className="right-column">
+                    <p>Money earned: {operations[3].money_earned}</p>
+                    <p>Profitability: {parseFloat(((operations[3].money_earned) / (operations[3].count)).toFixed(2))}</p>
+                  </div>
+              </div>
               )}
             </div>
           </div>
