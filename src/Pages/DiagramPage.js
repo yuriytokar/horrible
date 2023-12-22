@@ -8,6 +8,37 @@ function DiagramPage() {
   const [activeTab, setActiveTab] = useState('Statistics');
   const [operations, setOperations] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [translations, setTranslations] = useState({});
+  const [selectedLanguage, setSelectedLanguage] = useState('');
+
+  const saveLanguageToStorage = (language) => {
+    localStorage.setItem('selectedLanguage', language);
+  };
+
+  const getLanguageFromStorage = () => {
+    return localStorage.getItem('selectedLanguage') || 'ua';
+  };
+
+  const handleLanguageChange = (e) => {
+    const language = e.target.value;
+    setSelectedLanguage(language);
+    saveLanguageToStorage(language);
+  };
+
+  const setInitialLanguage = () => {
+    const storedLanguage = getLanguageFromStorage();
+    setSelectedLanguage(storedLanguage);
+  };
+
+  useEffect(() => {
+    setInitialLanguage();
+
+    axios.get('http://localhost:8000/db')
+      .then(result => {
+        setTranslations(result.data.translations);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   useEffect(() => {
     const fetchOperations = async () => {
@@ -42,7 +73,6 @@ function DiagramPage() {
     { name: operations[2].type, Profitability: parseFloat(((operations[2].money_earned)/(operations[2].count)).toFixed(2)) },
     { name: operations[3].type, Profitability: parseFloat(((operations[3].money_earned)/(operations[3].count)).toFixed(2)) },
   ];
-
 
   const datadiagram01 = [
     { name: operations[0].type, value: operations[0].used_money },
@@ -111,48 +141,58 @@ function DiagramPage() {
   return (
     <div className="mainDia">
       <nav>
-        <ul>
-          <li className={activeTab === 'Statistics' ? 'active' : ''} onClick={() => handleTabChange('Statistics')}>
-            Statistics
-          </li>
-          <li className={activeTab === 'Graphs' ? 'active' : ''} onClick={() => handleTabChange('Graphs')}>
-            Graphs
-          </li>
-          <li className={activeTab === 'Diagram' ? 'active' : ''} onClick={() => handleTabChange('Diagram')}>
-            Diagram
-          </li>
-        </ul>
+        <div className='nav1'>
+          <ul>
+            <li className={activeTab === 'Statistics' ? 'active' : ''} onClick={() => handleTabChange('Statistics')}>
+              {translations[selectedLanguage]?.navStatistics}
+            </li>
+            <li className={activeTab === 'Graphs' ? 'active' : ''} onClick={() => handleTabChange('Graphs')}>
+              {translations[selectedLanguage]?.navGraphs}
+            </li>
+            <li className={activeTab === 'Diagram' ? 'active' : ''} onClick={() => handleTabChange('Diagram')}>
+              {translations[selectedLanguage]?.navDiagram}
+            </li>
+          </ul>
+        </div>
+        <div className='nav2'>
+          <div className="language-selector2">
+            <select id="language" onChange={handleLanguageChange} value={selectedLanguage}>
+              <option value="en">EN</option>
+              <option value="ua">UA</option>
+            </select>
+          </div>
+        </div>
       </nav>
 
       {activeTab === 'Statistics' && (
         <div className="diagram-content">
           <div className="firstline">
             <div className="diagram-window transferStatistics">
-              <h2>Transfer Statistics</h2>
+              <h2>{translations[selectedLanguage]?.transferStatistics}</h2>
               {operations.length > 0 && (
                 <div className="flex-container">
                   <div className="left-column">
-                    <p>Used money: {operations[0].used_money}</p>
-                    <p>Count: {operations[0].count}</p>
+                    <p>{translations[selectedLanguage]?.usedmoney}: {operations[0].used_money}</p>
+                    <p>{translations[selectedLanguage]?.count}: {operations[0].count}</p>
                   </div>
                   <div className="right-column">
-                    <p>Money earned: {operations[0].money_earned}</p>
-                    <p>Profitability: {parseFloat(((operations[0].money_earned) / (operations[0].count)).toFixed(2))}</p>
+                    <p>{translations[selectedLanguage]?.moneyearned}: {operations[0].money_earned}</p>
+                    <p>{translations[selectedLanguage]?.profitability}: {parseFloat(((operations[0].money_earned) / (operations[0].count)).toFixed(2))}</p>
                   </div>
                 </div>
               )}
             </div>
             <div className="diagram-window top-upStatistics">
-              <h2>Top-up Statistics</h2>
+              <h2>{translations[selectedLanguage]?.topupStatistics}</h2>
               {operations.length > 1 && (
                 <div className="flex-container">
                   <div className="left-column">
-                    <p>Used money: {operations[1].used_money}</p>
-                    <p>Count: {operations[1].count}</p>
+                    <p>{translations[selectedLanguage]?.usedmoney}: {operations[1].used_money}</p>
+                    <p>{translations[selectedLanguage]?.count}: {operations[1].count}</p>
                   </div>
                   <div className="right-column">
-                    <p>Money earned: {operations[1].money_earned}</p>
-                    <p>Profitability: {parseFloat(((operations[1].money_earned) / (operations[1].count)).toFixed(2))}</p>
+                    <p>{translations[selectedLanguage]?.moneyearned}: {operations[1].money_earned}</p>
+                    <p>{translations[selectedLanguage]?.profitability}: {parseFloat(((operations[1].money_earned) / (operations[1].count)).toFixed(2))}</p>
                   </div>
                 </div>
               )}
@@ -160,31 +200,31 @@ function DiagramPage() {
           </div>
           <div className="secondline">
             <div className="diagram-window depositStatistics">
-              <h2>Deposit Statistics</h2>
+              <h2>{translations[selectedLanguage]?.depositStatistics}</h2>
               {operations.length > 2 && (
                 <div className="flex-container">
                   <div className="left-column">
-                    <p>Used money: {operations[2].used_money}</p>
-                    <p>Count: {operations[2].count}</p>
+                    <p>{translations[selectedLanguage]?.usedmoney}: {operations[2].used_money}</p>
+                    <p>{translations[selectedLanguage]?.count}: {operations[2].count}</p>
                   </div>
                   <div className="right-column">
-                    <p>Money earned: {operations[2].money_earned}</p>
-                    <p>Profitability: {parseFloat(((operations[2].money_earned) / (operations[2].count)).toFixed(2))}</p>
+                    <p>{translations[selectedLanguage]?.moneyearned}: {operations[2].money_earned}</p>
+                    <p>{translations[selectedLanguage]?.profitability}: {parseFloat(((operations[2].money_earned) / (operations[2].count)).toFixed(2))}</p>
                   </div>
               </div>
               )}
             </div>
             <div className="diagram-window withdrawStatistics">
-              <h2>Withdraw Statistics</h2>
+              <h2>{translations[selectedLanguage]?.withdrawStatistics}</h2>
               {operations.length > 3 && (
                 <div className="flex-container">
                   <div className="left-column">
-                    <p>Used money: {operations[3].used_money}</p>
-                    <p>Count: {operations[3].count}</p>
+                    <p>{translations[selectedLanguage]?.usedmoney}: {operations[3].used_money}</p>
+                    <p>{translations[selectedLanguage]?.count}: {operations[3].count}</p>
                   </div>
                   <div className="right-column">
-                    <p>Money earned: {operations[3].money_earned}</p>
-                    <p>Profitability: {parseFloat(((operations[3].money_earned) / (operations[3].count)).toFixed(2))}</p>
+                    <p>{translations[selectedLanguage]?.moneyearned}: {operations[3].money_earned}</p>
+                    <p>{translations[selectedLanguage]?.profitability}: {parseFloat(((operations[3].money_earned) / (operations[3].count)).toFixed(2))}</p>
                   </div>
               </div>
               )}
@@ -196,7 +236,7 @@ function DiagramPage() {
       {activeTab === 'Graphs' && (     
         <div className='linegraphs'>
           <div className='firstgraphs'>
-          <p>The funds that have passed through operations.</p>
+          <p>{translations[selectedLanguage]?.graphsPone}</p>
             <ResponsiveContainer width="100%" height="70%">
             <BarChart
             width={500}
@@ -219,7 +259,7 @@ function DiagramPage() {
             </ResponsiveContainer>
           </div>
           <div className='secondgraphs'>
-          <p>The funds that have passed through operations.</p>
+          <p>{translations[selectedLanguage]?.graphsPtwo}</p>
             <ResponsiveContainer width="100%" height="70%">
             <BarChart
             width={500}
@@ -247,7 +287,7 @@ function DiagramPage() {
       {activeTab === 'Diagram' && (
         <div className='linediagram'>
           <div className='firstdiagram'>
-            <p>The ratio of funds that have passed through operations.</p>
+            <p>{translations[selectedLanguage]?.diagramPone}</p>
             <PieChart width={600} height={400}>
               <Pie
                 activeIndex={activeIndex}
@@ -264,7 +304,7 @@ function DiagramPage() {
             </PieChart>
           </div>
           <div className='seconddiagram'>
-            <p>The ratio of money earned by the bank per unit of operation.</p>
+            <p>{translations[selectedLanguage]?.diagramPtwo}</p>
             <PieChart width={600} height={400}>
               <Pie
                 dataKey="value"

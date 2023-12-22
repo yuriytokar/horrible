@@ -10,6 +10,19 @@
   background-color: rgba(48, 22, 4, 0.714);
   padding: 10px;
   text-align: center; /* Це центрує текст посередині */
+  display: flex;
+}
+
+.nav1 {
+  flex: 100;
+}
+
+.nav2 {
+  flex: 1;
+  z-index: 0;
+  position: absolute;
+  right: 0;
+  margin-right: 30px;
 }
 
 .mainDia ul {
@@ -33,6 +46,19 @@
 
 .mainDia li.active {
   background-color: #236d2876;
+}
+
+.language-selector2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.language-selector2 select {
+  background-color: rgba(48, 22, 4, 0.714); 
+  border: 2px solid #9b852c;
+  border-radius: 10px;
+  padding: 5px;
+  color: #fff;
 }
 
 /* Стилі для контенту вкладок */
