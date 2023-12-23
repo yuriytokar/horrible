@@ -45,7 +45,11 @@ const LoginPage = () => {
 
   const handleSuccessfulLogin = (user) => {
     localStorage.setItem('user', JSON.stringify(user));
-    navigate('/home');
+    if (user.card) {
+      navigate('/home');
+    } else {
+      navigate('/payment');
+    }
   };
 
   const handleSubmit = async (e) => {
