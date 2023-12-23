@@ -70,7 +70,7 @@ const RegisterPage = () => {
             axios.post('http://localhost:8000/users', formData)
               .then(result => {
                 localStorage.setItem('isRegistered', 'true');
-                navigate('/'); // Змінено перенаправлення на /payment
+                navigate('/'); 
               })
               .catch(err => console.log(err));
           } else {

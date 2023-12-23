@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import axios from 'axios';
-import '../styles/PaymentForm.css'
 import { useNavigate } from 'react-router-dom';
+import '../styles/PaymentForm.css';
 
 const PaymentForm = () => {
   const [state, setState] = useState({
@@ -15,20 +15,28 @@ const PaymentForm = () => {
   });
 
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
+    const isRegistered = localStorage.getItem('isRegistered');
+    const paymentCompleted = localStorage.getItem('paymentCompleted');
 
-    if (!loggedInUser) {
-      navigate('/');
-    } else {
+    if (paymentCompleted) {
+      navigate('/home'); 
+    } else if (!loggedInUser && !isRegistered) {
+      navigate('/'); 
+    } else if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
+      setUserData(foundUser);
       setState({
         number: foundUser.card?.number || '',
         expiry: foundUser.card?.expiry || '',
         cvc: foundUser.card?.cvc || '',
         name: foundUser.card?.name || '',
       });
+    } else {
+      setUserData({ card: {} });
     }
   }, [navigate]);
 
@@ -41,34 +49,11 @@ const PaymentForm = () => {
     setState((prev) => ({ ...prev, focus: evt.target.name }));
   };
 
-  const validateForm = () => {
-    const errors = {};
-
-    if (state.number.length !== 16) {
-      errors.number = 'Номер картки повинен містити 16 цифр';
-    }
-
-    if (state.cvc.length !== 3) {
-      errors.cvc = 'CVC повинен містити 3 символи';
-    }
-
-    
-
-    return errors;
-  };
-
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const validationErrors = validateForm();
-
-    if (Object.keys(validationErrors).length > 0) {
-      alert('Будь ласка, виправте наступні помилки:\n' + Object.values(validationErrors).join('\n'));
-      return;
-    }
-
     const updatedUserData = {
-      ...JSON.parse(localStorage.getItem('user')),
+      ...userData,
       card: {
         name: state.name,
         number: state.number,
@@ -78,18 +63,15 @@ const PaymentForm = () => {
     };
 
     try {
-      if (updatedUserData.id) {
-        await axios.put(`http://localhost:8000/users/${updatedUserData.id}`, updatedUserData);
+      if (userData.id) {
+        await axios.put(`http://localhost:8000/users/${userData.id}`, updatedUserData);
+        localStorage.setItem('user', JSON.stringify(updatedUserData));
+        localStorage.setItem('paymentCompleted', 'true'); 
+        localStorage.removeItem('isRegistered');
+        navigate('/home'); 
       }
-      console.log('Дані користувача оновлені успішно.');
-
-      // Оновлення localStorage з даними користувача
-      localStorage.setItem('user', JSON.stringify(updatedUserData));
-
-      localStorage.removeItem('isRegistered'); // Видалення прапорця реєстрації
-      navigate('/home');
     } catch (error) {
-      console.error('Помилка при оновленні даних користувача:', error);
+      console.error('Error updating user data:', error);
     }
   };
 
@@ -106,39 +88,40 @@ const PaymentForm = () => {
         <input
           type="number"
           name="number"
-          placeholder="Номер картки"
+          placeholder="Card Number"
           value={state.number}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
-          maxLength="16"
+          required
         />
         <input
           type="text"
           name="expiry"
-          placeholder="MM/YY Термін дії"
+          placeholder="MM/YY Expiry"
           value={state.expiry}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
-          maxLength="5"
+          required
         />
         <input
-          type="text"
+          type="number"
           name="cvc"
           placeholder="CVC"
           value={state.cvc}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
-          maxLength="3"
+          required
         />
         <input
           type="text"
           name="name"
-          placeholder="Ім'я власника карти"
+          placeholder="Cardholder Name"
           value={state.name}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
+          required
         />
-        <button type="submit">Відправити</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
