@@ -4,7 +4,6 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import axios from 'axios';
 import '../styles/LoginPage.css';
 
-
 const LoginPage = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -14,8 +13,6 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({});
   const [translations, setTranslations] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState('');
-  const [isLoggedIn, setLoggedIn] = useState(false);
-
   const navigate = useNavigate();
 
   const saveLanguageToStorage = (language) => {
@@ -39,7 +36,6 @@ const LoginPage = () => {
 
   useEffect(() => {
     setInitialLanguage();
-
     axios.get('http://localhost:8000/db')
       .then(result => {
         setTranslations(result.data.translations);
@@ -48,9 +44,8 @@ const LoginPage = () => {
   }, []);
 
   const handleSuccessfulLogin = (user) => {
-    setLoggedIn(true);
-    localStorage.setItem('isLoggedIn', 'true');
-    navigate('/payment', { state: { user } });
+    localStorage.setItem('user', JSON.stringify(user));
+    navigate('/home');
   };
 
   const handleSubmit = async (e) => {
@@ -69,8 +64,6 @@ const LoginPage = () => {
     if (formData.password === '' || formData.password === null) {
       isValid = false;
       validationErrors.password = translations[selectedLanguage]?.invalidCredentials || 'Enter your password';
-    } else if (formData.phone.length > 9 && formData.password.length > 0) {
-      validationErrors.password = translations[selectedLanguage]?.invalidCredentials || 'Invalid credentials';
     }
 
     if (isValid) {
@@ -79,11 +72,7 @@ const LoginPage = () => {
         const user = response.data.find(user => user.phone === formData.phone && user.password === formData.password);
 
         if (user) {
-          if (user.blocked) {
-            navigate('/BlockedPage');
-          } else {
-            handleSuccessfulLogin(user);
-          }
+          handleSuccessfulLogin(user);
         } else {
           isValid = false;
           validationErrors.password = translations[selectedLanguage]?.incorrectPassword || 'Incorrect password';

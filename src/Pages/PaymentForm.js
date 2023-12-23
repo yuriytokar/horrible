@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import '../styles/PaymentForm.css';
-import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentForm = () => {
   const [state, setState] = useState({
@@ -14,8 +14,34 @@ const PaymentForm = () => {
     focus: '',
   });
 
-  const { state: routerState } = useLocation();
-  const userData = routerState ? routerState.user : null;
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('user');
+    const isRegistered = localStorage.getItem('isRegistered');
+
+    if (!loggedInUser && !isRegistered) {
+      navigate('/');
+    } else if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUserData(foundUser);
+      setState({
+        number: foundUser.card?.number || '',
+        expiry: foundUser.card?.expiry || '',
+        cvc: foundUser.card?.cvc || '',
+        name: foundUser.card?.name || '',
+      });
+    } else {
+      // Налаштуйте стан для новозареєстрованого користувача
+      setUserData({ card: {} });
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    // Зберігаємо дані в локальному сховищі браузера при зміні state
+    localStorage.setItem('paymentFormData', JSON.stringify(state));
+  }, [state]);
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
@@ -26,21 +52,9 @@ const PaymentForm = () => {
     setState((prev) => ({ ...prev, focus: evt.target.name }));
   };
 
-  useEffect(() => {
-    // Отримання даних користувача з файлу db.json
-    // Додайте власну логіку для отримання даних платежу тут
-  }, []);
-
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    // Перевірка, чи є авторизований користувач
-    if (!userData) {
-      console.error('User is not authenticated.');
-      return;
-    }
-
-    // Оновлення даних користувача в db.json
     const updatedUserData = {
       ...userData,
       card: {
@@ -52,9 +66,12 @@ const PaymentForm = () => {
     };
 
     try {
-      // Оновлення даних користувача на сервері
-      await axios.put(`http://localhost:8000/users/${userData.id}`, updatedUserData);
+      if (userData.id) {
+        await axios.put(`http://localhost:8000/users/${userData.id}`, updatedUserData);
+      }
       console.log('User data updated successfully.');
+      localStorage.removeItem('isRegistered'); // Видалення позначки реєстрації
+      navigate('/');
     } catch (error) {
       console.error('Error updating user data:', error);
     }
@@ -64,9 +81,9 @@ const PaymentForm = () => {
     <div className="payment-form-container">
       <Cards
         number={state.number}
+        name={state.name}
         expiry={state.expiry}
         cvc={state.cvc}
-        name={state.name}
         focused={state.focus}
       />
       <form onSubmit={handleSubmit}>
@@ -102,16 +119,6 @@ const PaymentForm = () => {
           onChange={handleInputChange}
           onFocus={handleInputFocus}
         />
-        <div className="user-info">
-          {userData && (
-            <>
-              <p>Cardholder: {userData.card.name}</p>
-              <p>Card Number: {userData.card.number}</p>
-              <p>Expiry: {userData.card.expiry}</p>
-              <p>CVC: {userData.card.cvc}</p>
-            </>
-          )}
-        </div>
         <button type="submit">Submit</button>
       </form>
     </div>

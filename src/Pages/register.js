@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/form.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -70,8 +69,8 @@ const RegisterPage = () => {
           if (result.data.length === 0) {
             axios.post('http://localhost:8000/users', formData)
               .then(result => {
-                console.log(result);
-                navigate('/');
+                localStorage.setItem('isRegistered', 'true');
+                navigate('/payment'); // Змінено перенаправлення на /payment
               })
               .catch(err => console.log(err));
           } else {

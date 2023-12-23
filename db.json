@@ -17,11 +17,10 @@
       "alreadyHaveAccount": "Already have an account?",
       "logIn": "Log In",
       "passwordShort": "Password is too short",
-
       "navStatistics": "Statistics",
       "navGraphs": "Graphs",
       "navDiagram": "Diagram",
-      "transferStatistics" : "Transfer Statistics",
+      "transferStatistics": "Transfer Statistics",
       "topupStatistics": "Top-up Statistics",
       "depositStatistics": "Deposit Statistics",
       "withdrawStatistics": "Withdraw Statistics",
@@ -33,7 +32,6 @@
       "graphsPtwo": "The money earned by the bank per unit of operation.",
       "diagramPone": "The ratio of funds that have passed through operations.",
       "diagramPtwo": "The ratio of money earned by the bank per unit of operation."
-
     },
     "ua": {
       "phonePlaceholder": "Введіть номер телефону",
@@ -52,11 +50,10 @@
       "alreadyHaveAccount": "Вже маєте акаунт?",
       "logIn": "Увійдіть",
       "passwordShort": "Занадто короткий пароль",
-
       "navStatistics": "Статистика",
       "navGraphs": "Графіки",
       "navDiagram": "Діаграми",
-      "transferStatistics" : "Статистика переводів",
+      "transferStatistics": "Статистика переводів",
       "topupStatistics": "Статистика поповнення мобільного",
       "depositStatistics": "Статистика депозитів",
       "withdrawStatistics": "Статистика зняття з карти",
@@ -78,10 +75,10 @@
       "access": "user",
       "blocked": false,
       "card": {
-        "number": "1111222233334444",
-        "expiry": "12/25",
-        "cvc": "123",
-        "name": "John Doe"
+        "name": "misha",
+        "number": "4111222233334444",
+        "expiry": "12/03",
+        "cvc": "123"
       }
     },
     {
@@ -90,10 +87,10 @@
       "id": 2,
       "access": "user",
       "card": {
-        "number": "5555666677778888",
-        "expiry": "10/23",
-        "cvc": "456",
-        "name": "Jane Doe"
+        "name": "інокентій",
+        "number": "4088666677778888",
+        "expiry": "10/03",
+        "cvc": "456"
       },
       "blocked": false
     },
@@ -107,6 +104,37 @@
         "expiry": "1244",
         "cvc": "123"
       }
+    },
+    {
+      "phone": "09722233344550",
+      "password": "lalabobohehehaha",
+      "id": 4
+    },
+    {
+      "phone": "0884568476415635",
+      "password": "15347651354684532",
+      "id": 5
+    },
+    {
+      "phone": "50683051603520",
+      "password": "fokg'j'gerkwreogkr",
+      "id": 6
+    },
+    {
+      "phone": "050341534015215",
+      "password": "зджблщдлжлхждд",
+      "id": 7,
+      "card": {
+        "name": "тарас",
+        "number": "4325000002226333",
+        "expiry": "1111",
+        "cvc": "0124"
+      }
+    },
+    {
+      "phone": "022555555566666",
+      "password": "44445555557777777",
+      "id": 8
     }
   ],
   "operations": [
