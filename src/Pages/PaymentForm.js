@@ -10,7 +10,7 @@ const PaymentForm = () => {
     number: '',
     expiry: '',
     cvc: '',
-    balance: '', // Додано поле для балансу
+    balance: '', 
     focus: '',
   });
 
@@ -33,7 +33,7 @@ const PaymentForm = () => {
         number: foundUser.card?.number || '',
         expiry: foundUser.card?.expiry || '',
         cvc: foundUser.card?.cvc || '',
-        balance: foundUser.balance || '0.00', // Встановлення балансу
+        balance: foundUser.balance || '0.00',
       });
     } else {
       setUserData({ card: {} });
@@ -59,7 +59,7 @@ const PaymentForm = () => {
         expiry: state.expiry,
         cvc: state.cvc,
       },
-      balance: state.balance, // Оновлення балансу у даних користувача
+      balance: state.balance,
     };
 
     try {
@@ -79,7 +79,7 @@ const PaymentForm = () => {
     <div className="payment-form-container">
       <Cards
         number={state.number}
-        name={`Balance: ${state.balance}`} // Відображення балансу замість імені
+        name={`Balance: ${state.balance}`} 
         expiry={state.expiry}
         cvc={state.cvc}
         focused={state.focus}

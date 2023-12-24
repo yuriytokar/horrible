@@ -1,0 +1,58 @@
+.transfer-form-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 40px;
+    border: 2px solid #9b852c;
+    border-radius: 20px;
+    background-color: rgba(48, 22, 4, 0.714);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+  }
+  
+  .transfer-form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .user-balance {
+    margin-bottom: 20px;
+    font-size: large;
+    color: #fff;
+  }
+  
+  .transfer-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid white;
+    color: #fff;
+  }
+  
+  .transfer-button {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 140px;
+    margin-left: 31%;
+  }
+  
+  .transfer-button:hover {
+    background-color: #c0392b;
+  }
+  
+  .text-danger {
+    color: #c11b1b;
+    font-size: large;
+  }
+  

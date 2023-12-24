@@ -8,6 +8,7 @@ import Register from './Pages/register';
 import Home from './Pages/home';
 import './styles/App.css'; 
 import PaymentForm from './Pages/PaymentForm';
+import TransferPage from './Pages/TransferPage';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/payment" element={<PaymentForm/>} />
+        <Route path="/transfer" element={<TransferPage />} />
         <Route path="/" element={<LoginPage />} />
       </Routes>
     </Router>
