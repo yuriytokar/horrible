@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../styles/transfer.css'
 
 const TransferPage = () => {
@@ -8,6 +9,8 @@ const TransferPage = () => {
     amount: '',
   });
   const [userData, setUserData] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
@@ -33,9 +36,6 @@ const TransferPage = () => {
     }
 
     try {
-      const updatedSender = { ...userData, balance: parseFloat(userData.balance) - parseFloat(transferData.amount) };
-      await axios.put(`http://localhost:8000/users/${userData.id}`, updatedSender);
-
       const response = await axios.get(`http://localhost:8000/users?card.number=${transferData.recipientCardNumber}`);
       const recipient = response.data[0];
 
@@ -44,24 +44,38 @@ const TransferPage = () => {
         return;
       }
 
-      const updatedRecipient = { ...recipient, balance: parseFloat(recipient.balance || 0) + parseFloat(transferData.amount) };
+      const updatedRecipient = { 
+        ...recipient, 
+        balance: parseFloat(recipient.balance || 0) + parseFloat(transferData.amount)
+      };
       await axios.put(`http://localhost:8000/users/${recipient.id}`, updatedRecipient);
 
+      const updatedSender = { 
+        ...userData, 
+        balance: parseFloat(userData.balance) - parseFloat(transferData.amount)
+      };
+      await axios.put(`http://localhost:8000/users/${userData.id}`, updatedSender);
+
+      localStorage.setItem('user', JSON.stringify(updatedSender));
       alert("Transfer successful.");
-      localStorage.setItem('user', JSON.stringify(updatedSender)); 
-      setUserData(updatedSender);
+      navigate('/home');
     } catch (error) {
-      console.error('Transfer error:', error);
+      console.error('Error during transfer:', error);
       alert('Error during transfer');
     }
   };
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="transfer-form-container">
+      <button onClick={handleBack} className="back-button">Back</button>
       <h2>Transfer Money</h2>
       {userData && (
         <div className="user-balance">
-          <p>Current Balance: {userData.balance || '0.00'}</p>
+          <p>Current Balance: ${userData.balance || '0.00'}</p>
         </div>
       )}
       <form onSubmit={handleSubmit}>
@@ -81,7 +95,7 @@ const TransferPage = () => {
           onChange={handleInputChange}
           required
         />
-        <button className = "transfer-button" type="submit">Transfer</button>
+        <button type="submit" className='transfer-button' >Transfer</button>
       </form>
     </div>
   );

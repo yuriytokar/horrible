@@ -39,7 +39,7 @@ const HomePage = () => {
             cvc={userData.card?.cvc || '###'}
             focused={null}
           />
-          <button onClick={handleTransfer} className="transfer-button">Transfer Money</button>
+          <button onClick={handleTransfer} className="transfer-buttn">Transfer Money</button>
 
           <button onClick={handleLogout} className="logout-button">Logout</button>
         </div>

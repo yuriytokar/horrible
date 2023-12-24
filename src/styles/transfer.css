@@ -11,6 +11,22 @@
     align-items: center;
     color: #fff;
   }
+
+  .back-button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 10px;
+    background-color: #36f45c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .back-button:hover {
+    background-color: #28a745;
+  }
   
   .transfer-form-title {
     text-align: center;

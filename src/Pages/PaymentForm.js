@@ -10,7 +10,7 @@ const PaymentForm = () => {
     number: '',
     expiry: '',
     cvc: '',
-    balance: '', 
+    balance: '',
     focus: '',
   });
 
@@ -19,14 +19,7 @@ const PaymentForm = () => {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
-    const isRegistered = localStorage.getItem('isRegistered');
-    const paymentCompleted = localStorage.getItem('paymentCompleted');
-
-    if (paymentCompleted) {
-      navigate('/home');
-    } else if (!loggedInUser && !isRegistered) {
-      navigate('/');
-    } else if (loggedInUser) {
+    if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       setUserData(foundUser);
       setState({
@@ -36,7 +29,7 @@ const PaymentForm = () => {
         balance: foundUser.balance || '0.00',
       });
     } else {
-      setUserData({ card: {} });
+      navigate('/');
     }
   }, [navigate]);
 
@@ -52,6 +45,15 @@ const PaymentForm = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
+    // Перевірка на унікальність номера карти
+    if (state.number !== userData.card?.number) {
+      const response = await axios.get(`http://localhost:8000/users?card.number=${state.number}`);
+      if (response.data.length > 0) {
+        alert("A card with this number already exists.");
+        return;
+      }
+    }
+
     const updatedUserData = {
       ...userData,
       card: {
@@ -63,13 +65,9 @@ const PaymentForm = () => {
     };
 
     try {
-      if (userData.id) {
-        await axios.put(`http://localhost:8000/users/${userData.id}`, updatedUserData);
-        localStorage.setItem('user', JSON.stringify(updatedUserData));
-        localStorage.setItem('paymentCompleted', 'true');
-        localStorage.removeItem('isRegistered');
-        navigate('/home');
-      }
+      await axios.put(`http://localhost:8000/users/${userData.id}`, updatedUserData);
+      localStorage.setItem('user', JSON.stringify(updatedUserData));
+      navigate('/home');
     } catch (error) {
       console.error('Error updating user data:', error);
     }
@@ -79,7 +77,7 @@ const PaymentForm = () => {
     <div className="payment-form-container">
       <Cards
         number={state.number}
-        name={`Balance: ${state.balance}`} 
+        name={`Balance: ${state.balance}`}
         expiry={state.expiry}
         cvc={state.cvc}
         focused={state.focus}
