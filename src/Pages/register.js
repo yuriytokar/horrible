@@ -127,7 +127,7 @@ const RegisterPage = () => {
         </button>
       </form>
       <p className="login-note">
-        {translations[selectedLanguage]?.alreadyHaveAccount}{' '}
+        {translations[selectedLanguage]?.alreadyHaveAccount}{'  '}
         <Link to="/">{translations[selectedLanguage]?.logIn}</Link>
       </p>
       <span className="text-danger">

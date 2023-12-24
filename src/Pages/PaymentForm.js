@@ -10,7 +10,7 @@ const PaymentForm = () => {
     number: '',
     expiry: '',
     cvc: '',
-    name: '',
+    balance: '', // Додано поле для балансу
     focus: '',
   });
 
@@ -23,9 +23,9 @@ const PaymentForm = () => {
     const paymentCompleted = localStorage.getItem('paymentCompleted');
 
     if (paymentCompleted) {
-      navigate('/home'); 
+      navigate('/home');
     } else if (!loggedInUser && !isRegistered) {
-      navigate('/'); 
+      navigate('/');
     } else if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       setUserData(foundUser);
@@ -33,7 +33,7 @@ const PaymentForm = () => {
         number: foundUser.card?.number || '',
         expiry: foundUser.card?.expiry || '',
         cvc: foundUser.card?.cvc || '',
-        name: foundUser.card?.name || '',
+        balance: foundUser.balance || '0.00', // Встановлення балансу
       });
     } else {
       setUserData({ card: {} });
@@ -55,20 +55,20 @@ const PaymentForm = () => {
     const updatedUserData = {
       ...userData,
       card: {
-        name: state.name,
         number: state.number,
         expiry: state.expiry,
         cvc: state.cvc,
       },
+      balance: state.balance, // Оновлення балансу у даних користувача
     };
 
     try {
       if (userData.id) {
         await axios.put(`http://localhost:8000/users/${userData.id}`, updatedUserData);
         localStorage.setItem('user', JSON.stringify(updatedUserData));
-        localStorage.setItem('paymentCompleted', 'true'); 
+        localStorage.setItem('paymentCompleted', 'true');
         localStorage.removeItem('isRegistered');
-        navigate('/home'); 
+        navigate('/home');
       }
     } catch (error) {
       console.error('Error updating user data:', error);
@@ -79,7 +79,7 @@ const PaymentForm = () => {
     <div className="payment-form-container">
       <Cards
         number={state.number}
-        name={state.name}
+        name={`Balance: ${state.balance}`} // Відображення балансу замість імені
         expiry={state.expiry}
         cvc={state.cvc}
         focused={state.focus}
@@ -114,12 +114,11 @@ const PaymentForm = () => {
         />
         <input
           type="text"
-          name="name"
-          placeholder="Cardholder Name"
-          value={state.name}
+          name="balance"
+          placeholder="Balance"
+          value={state.balance}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
-          required
         />
         <button type="submit">Submit</button>
       </form>

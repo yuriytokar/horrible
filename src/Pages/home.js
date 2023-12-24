@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Cards from 'react-credit-cards-2';
-import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
@@ -17,11 +16,9 @@ const HomePage = () => {
     }
   }, [navigate]);
 
-  const cardholderName = userData && userData.card && userData.card.name ? userData.card.name : 'No Name Provided';
-
   const handleLogout = () => {
-    localStorage.removeItem('user'); // Вилогінювання користувача
-    navigate('/'); // Перенаправлення на сторінку входу
+    localStorage.removeItem('user');
+    navigate('/');
   };
 
   return (
@@ -31,16 +28,17 @@ const HomePage = () => {
         <div className="card-container">
           <Cards
             number={userData.card?.number || '#### #### #### ####'}
-            name={cardholderName}
+            name={`Balance: ${userData.balance || '0.00'}`} // Відображення балансу замість імені власника
             expiry={userData.card?.expiry || '##/##'}
             cvc={userData.card?.cvc || '###'}
             focused={null}
           />
           <div className="user-info">
-            <p>Cardholder: {cardholderName}</p>
+            <p>Cardholder: {userData.card?.name || 'No Name Provided'}</p>
             <p>Card Number: {userData.card?.number}</p>
             <p>Expiry: {userData.card?.expiry}</p>
             <p>CVC: {userData.card?.cvc}</p>
+            <p>Balance: {userData.balance || '0.00'}</p> {/* Відображення балансу */}
           </div>
           <button onClick={handleLogout} className="logout-button">Logout</button>
         </div>
