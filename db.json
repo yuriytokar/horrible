@@ -95,6 +95,20 @@
       "amount": "100",
       "date": "2023-12-25",
       "id": 5
+    },
+    {
+      "senderCardNumber": "5130540885310354",
+      "recipientCardNumber": "4543453452345234",
+      "amount": "1000",
+      "date": "2023-12-25",
+      "id": 6
+    },
+    {
+      "senderCardNumber": "5130540885310354",
+      "recipientCardNumber": "4543453452345234",
+      "amount": "500",
+      "date": "2023-12-25",
+      "id": 7
     }
   ],
   "users": [
@@ -377,8 +391,19 @@
         "expiry": "3434",
         "cvc": "234"
       },
-      "balance": "1234.00",
+      "balance": 2734,
       "blocked": false
+    },
+    {
+      "phone": "09700000812",
+      "password": "marilokapobster",
+      "id": 28,
+      "card": {
+        "number": "5130540885310354",
+        "expiry": "0128",
+        "cvc": "777"
+      },
+      "balance": 18500
     }
   ],
   "operations": [

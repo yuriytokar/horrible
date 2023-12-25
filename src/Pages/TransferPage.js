@@ -17,6 +17,7 @@ const TransferPage = () => {
     if (loggedInUser) {
       setUserData(JSON.parse(loggedInUser));
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleInputChange = (event) => {
@@ -45,21 +46,18 @@ const TransferPage = () => {
         return;
       }
 
-      // Оновлення балансу отримувача
       const updatedRecipient = { 
         ...recipient, 
         balance: parseFloat(recipient.balance || 0) + parseFloat(transferData.amount)
       };
       await axios.put(`http://localhost:8000/users/${recipient.id}`, updatedRecipient);
 
-      // Оновлення балансу відправника
       const updatedSender = { 
         ...userData, 
         balance: parseFloat(userData.balance) - parseFloat(transferData.amount)
       };
       await axios.put(`http://localhost:8000/users/${userData.id}`, updatedSender);
 
-      // Створення запису про транзакцію
       const transactionRecord = {
         senderCardNumber: userData.card.number,
         recipientCardNumber: transferData.recipientCardNumber,
@@ -67,12 +65,11 @@ const TransferPage = () => {
         date: new Date().toISOString().split('T')[0] 
       };
 
-      // Відправка запису про транзакцію на сервер
       await axios.post('http://localhost:8000/transactions', transactionRecord);
 
       localStorage.setItem('user', JSON.stringify(updatedSender));
       alert("Transfer successful.");
-      navigate('/transactions'); 
+      navigate('/home'); 
     } catch (error) {
       console.error('Error during transfer:', error);
       alert('Error during transfer');

@@ -47,4 +47,14 @@
     font-weight: bold;
   }
   
+  .transactions-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .transactions-container li {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid white;
+  }
   
