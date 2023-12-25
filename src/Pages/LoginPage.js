@@ -41,6 +41,7 @@ const LoginPage = () => {
         setTranslations(result.data.translations);
       })
       .catch(err => console.log(err));
+      // eslint-disable-next-line
   }, []);
 
   const handleSuccessfulLogin = (user) => {

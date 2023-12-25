@@ -43,6 +43,7 @@ const RegisterPage = () => {
         setTranslations(translations);
       })
       .catch(err => console.log(err));
+      // eslint-disable-next-line
   }, []); 
 
   const handleSubmit = (e) => {

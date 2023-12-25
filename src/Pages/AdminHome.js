@@ -86,7 +86,6 @@ const AdminPage = () => {
         </div>
         {userFound && currentUser ? (
           <div className="user-status">
-            <p>Name: {currentUser.card.name}</p>
             <p>Phone number: {currentUser.phone}</p>
             <p>Password: {currentUser.password}</p>
             <p>Status: {currentUser.blocked ? 'Blocked' : 'Not Blocked'}</p>
@@ -104,7 +103,7 @@ const AdminPage = () => {
           {blockedUsers.map((user) => (
             <li key={user.id}>
               <div className="blocked-user-item">
-                <p>{user.card.name}</p>
+                <p>{user.phone}</p>
                 <button onClick={() => unblockUser(user)}>Unblock</button>
               </div>
             </li>
