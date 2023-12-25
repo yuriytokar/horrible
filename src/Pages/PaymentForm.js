@@ -24,7 +24,7 @@ const PaymentForm = () => {
     if (!loggedInUser) {
       navigate('/');
     } else if (paymentSubmitted) {
-      navigate('/home'); // або будь-яка інша сторінка
+      navigate('/home');
     } else {
       const foundUser = JSON.parse(loggedInUser);
       setUserData(foundUser);
