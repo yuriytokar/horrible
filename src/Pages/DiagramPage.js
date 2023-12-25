@@ -38,6 +38,7 @@ function DiagramPage() {
         setTranslations(result.data.translations);
       })
       .catch(err => console.log(err));
+      // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
