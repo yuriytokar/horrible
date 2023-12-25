@@ -1,0 +1,40 @@
+.home-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding-top: 20px;
+  }
+  
+  .home-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .card-container {
+    margin-bottom: 20px;
+  }
+  
+  .transfer-buttn {
+    margin-left: 24.5%;
+    margin-top: 20px;
+  }
+  .logout-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 5px 10px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover {
+    background-color: #a72305;
+  }
+  
+  

@@ -1,100 +1,130 @@
-import React, { useState } from 'react';
-import '../styles/LoginPage.css';
-import { Link } from "react-router-dom";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
+import '../styles/LoginPage.css';
 
 const LoginPage = () => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [formData, setFormData] = useState({
     phone: '',
     password: '',
   });
   const [errors, setErrors] = useState({});
-  const [valid, setValid] = useState(true);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [translations, setTranslations] = useState({});
+  const [selectedLanguage, setSelectedLanguage] = useState('');
   const navigate = useNavigate();
 
-  let actions = valid;
-  if(actions === 'wqrwqrqwr'){
-    console.log('hehe, it happaned')
+  const saveLanguageToStorage = (language) => {
+    localStorage.setItem('selectedLanguage', language);
+  };
 
-  }
-  const handleSubmit = (e) => {
+  const getLanguageFromStorage = () => {
+    return localStorage.getItem('selectedLanguage') || 'en';
+  };
+
+  const handleLanguageChange = (e) => {
+    const language = e.target.value;
+    setSelectedLanguage(language);
+    saveLanguageToStorage(language);
+  };
+
+  const setInitialLanguage = () => {
+    const storedLanguage = getLanguageFromStorage();
+    setSelectedLanguage(storedLanguage);
+  };
+
+  useEffect(() => {
+    setInitialLanguage();
+    axios.get('http://localhost:8000/db')
+      .then(result => {
+        setTranslations(result.data.translations);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  const handleSuccessfulLogin = (user) => {
+    localStorage.setItem('user', JSON.stringify(user));
+    if (user.card) {
+      navigate('/home');
+    } else {
+      navigate('/payment');
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let validationErrors = {};
-    let isvalid = true;
+    let isValid = true;
 
     if (formData.phone === '' || formData.phone === null) {
-      isvalid = false;
-      validationErrors.phone = 'Введіть номер телефону';
+      isValid = false;
+      validationErrors.phone = translations[selectedLanguage]?.invalidPhone || 'Enter your phone number';
     } else if (formData.phone.length <= 9) {
-      isvalid = false;
-      validationErrors.phone = 'Неіснуючий номер телефону';
+      isValid = false;
+      validationErrors.phone = translations[selectedLanguage]?.invalidPhone || 'Invalid phone number';
     }
+
     if (formData.password === '' || formData.password === null) {
-      isvalid = false;
-      validationErrors.password = 'Введіть пароль';
-    } else if (formData.phone.length > 9 && formData.password.length > 0){
-      validationErrors.password = "Введено хибні дані";
+      isValid = false;
+      validationErrors.password = translations[selectedLanguage]?.invalidCredentials || 'Enter your password';
     }
 
-    
+    if (isValid) {
+      try {
+        const response = await axios.get('http://localhost:8000/users');
+        const user = response.data.find(user => user.phone === formData.phone && user.password === formData.password);
 
-  axios.get('http://localhost:8000/users')
-  .then(result => {
-    result.data.map(user => {
-      if (user.phone === formData.phone) {
-        if (user.password === formData.password) {
-          if (user.blocked) {
-            navigate('/BlockedPage')
-          } else {
-            navigate('/home')
-          }
+        if (user) {
+          handleSuccessfulLogin(user);
         } else {
-          isvalid = false;
-          validationErrors.password = 'Невірний пароль';          
+          isValid = false;
+          validationErrors.password = translations[selectedLanguage]?.incorrectPassword || 'Incorrect password';
         }
+      } catch (error) {
+        console.error(error);
       }
-      return null;
-    })
-    setErrors(validationErrors)
-    setValid(isvalid)
-  })
-  .catch(err => console.log(err));
-  
+    }
+
+    setErrors(validationErrors);
   };
 
   return (
     <div className="login-container">
+      <div className="language-selector">
+        <select id="language" onChange={handleLanguageChange} value={selectedLanguage}>
+          <option value="en">EN</option>
+          <option value="ua">UA</option>
+        </select>
+      </div>
+
       <h2>T&S</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Номер телефону:
-          <input type="tel" onChange={(event) => setFormData({ ...formData, phone: event.target.value }) }/>
-           
+          {translations[selectedLanguage]?.phonePlaceholder}
+          <input type="tel" onChange={(event) => setFormData({ ...formData, phone: event.target.value })} />
         </label>
         <br />
         <label className="form__password">
-          Пароль:
+          {translations[selectedLanguage]?.passwordPlaceholder}
           <input
-            type={isPasswordVisible ? "text" : "password"}
-            onChange={(event) =>
-              setFormData({ ...formData, password: event.target.value })
-            }
+            type={isPasswordVisible ? 'text' : 'password'}
+            onChange={(event) => setFormData({ ...formData, password: event.target.value })}
           />
-          <span className='form__eye' onClick={() => setIsPasswordVisible(prev => !prev)}>
+          <span className="form__eye" onClick={() => setIsPasswordVisible((prev) => !prev)}>
             {isPasswordVisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
           </span>
         </label>
         <br />
         <button type="submit" className="login-button">
-          Увійти
+          {translations[selectedLanguage]?.loginButton}
         </button>
       </form>
-      <p className="register-note">Ще не зареєстровані? <Link to="/Register">Зареєструйтесь!</Link></p>
-      <br/>
+      <p className="register-note">
+        {translations[selectedLanguage]?.notRegistered}{' '}
+        <Link to="/Register">{translations[selectedLanguage]?.registerNow}</Link>
+      </p>
+      <br />
       <span className="text-danger">
         {errors.phone && `${errors.phone}! `} {errors.password && `${errors.password}! `}
       </span>

@@ -1,0 +1,157 @@
+/* Стилі для Navbar */
+
+.mainDia {
+  margin: 20px 20px;
+}
+.mainDia nav {
+  border: 2px solid #9b852c;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: rgba(48, 22, 4, 0.714);
+  padding: 10px;
+  text-align: center; /* Це центрує текст посередині */
+  display: flex;
+}
+
+.nav1 {
+  flex: 100;
+}
+
+.nav2 {
+  flex: 1;
+  z-index: 0;
+  position: absolute;
+  right: 0;
+  margin-right: 30px;
+}
+
+.mainDia ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Це центрує вкладки */
+}
+
+.mainDia nav li {
+  border: 2px solid #9b852c;
+  border-radius: 10px;
+  margin-right: 30px;
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 15px 100px; /* Збільшивши padding для більшого тачу і розміщення посередині */
+  width: 100px;
+}
+
+.mainDia li.active {
+  background-color: #236d2876;
+}
+
+.language-selector2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.language-selector2 select {
+  background-color: rgba(48, 22, 4, 0.714); 
+  border: 2px solid #9b852c;
+  border-radius: 10px;
+  padding: 5px;
+  color: #fff;
+}
+
+/* Стилі для контенту вкладок */
+.diagram-content {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.firstline,
+.secondline {
+  display: flex;
+  justify-content: space-between;
+}
+
+.diagram-window {
+  border: 2px solid #9b852c;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: rgba(157, 157, 157, 0.19);;
+  color: #fff;
+  width: 48%; /* Зменшено, щоб вмістився у дві рядки */
+  text-align: center;
+  margin: 10px 10px;
+  backdrop-filter: blur(10px); /* Розмиття */
+}
+
+.diagram-window h2 {
+  color: #9ACD32;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-column,
+.right-column {
+  flex: 1;
+}
+
+
+
+.linegraphs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstgraphs, .secondgraphs {
+  margin: 10px 45px;
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(157, 157, 157, 0.19);
+  border: 2px solid #9b852c;
+  border-radius: 10px;
+  width: 700px;
+  height: 500px; /* Set a fixed height for both diagrams */
+  backdrop-filter: blur(10px); /* Розмиття */
+}
+
+.firstgraphs p, .secondgraphs p {
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+
+.linediagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstdiagram, .seconddiagram {
+  margin: 10px 45px;
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(157, 157, 157, 0.19);
+  border: 2px solid #9b852c;
+  border-radius: 10px;
+  width: 700px;
+  height: 500px; /* Set a fixed height for both diagrams */
+  backdrop-filter: blur(10px); /* Розмиття */
+}
+
+.firstdiagram p, .seconddiagram p{
+  margin: 0px;
+  font-size: 20px;
+}

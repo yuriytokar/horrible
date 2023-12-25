@@ -1,74 +1,341 @@
 {
+  "translations": {
+    "en": {
+      "phonePlaceholder": "Enter your phone number",
+      "passwordPlaceholder": "Enter your password",
+      "loginButton": "Log In",
+      "notRegistered": "Not registered?",
+      "registerNow": "Register now",
+      "invalidPhone": "Invalid phone number",
+      "invalidCredentials": "Invalid credentials",
+      "incorrectPassword": "Incorrect password",
+      "blockedUser": "Your account is blocked. Please contact support.",
+      "registerHeadline": "T&S Banking - Registration",
+      "enterPhoneNumber": "Enter your phone number",
+      "chooseStrongPassword": "Choose a strong password",
+      "registerButton": "Register",
+      "alreadyHaveAccount": "Already have an account?",
+      "logIn": "Log In",
+      "passwordShort": "Password is too short",
+      "navStatistics": "Statistics",
+      "navGraphs": "Graphs",
+      "navDiagram": "Diagram",
+      "transferStatistics": "Transfer Statistics",
+      "topupStatistics": "Top-up Statistics",
+      "depositStatistics": "Deposit Statistics",
+      "withdrawStatistics": "Withdraw Statistics",
+      "usedmoney": "Used money",
+      "count": "Count",
+      "moneyearned": "Money earned",
+      "profitability": "Profitability",
+      "graphsPone": "The funds that have passed through operations.",
+      "graphsPtwo": "The money earned by the bank per unit of operation.",
+      "diagramPone": "The ratio of funds that have passed through operations.",
+      "diagramPtwo": "The ratio of money earned by the bank per unit of operation."
+    },
+    "ua": {
+      "phonePlaceholder": "Введіть номер телефону",
+      "passwordPlaceholder": "Введіть пароль",
+      "loginButton": "Увійти",
+      "notRegistered": "Ще не зареєстровані?",
+      "registerNow": "Зареєструйтесь",
+      "invalidPhone": "Неіснуючий номер телефону",
+      "invalidCredentials": "Введено хибні дані",
+      "incorrectPassword": "Невірний пароль",
+      "blockedUser": "Ваш обліковий запис заблоковано. Будь ласка, зв'яжіться з підтримкою.",
+      "registerHeadline": "T&S Банкінг - Реєстрація",
+      "enterPhoneNumber": "Введіть свій номер телефону",
+      "chooseStrongPassword": "Вигадайте надійний пароль",
+      "registerButton": "Зареєструватися",
+      "alreadyHaveAccount": "Вже маєте акаунт?",
+      "logIn": "Увійдіть",
+      "passwordShort": "Занадто короткий пароль",
+      "navStatistics": "Статистика",
+      "navGraphs": "Графіки",
+      "navDiagram": "Діаграми",
+      "transferStatistics": "Статистика переводів",
+      "topupStatistics": "Статистика поповнення мобільного",
+      "depositStatistics": "Статистика депозитів",
+      "withdrawStatistics": "Статистика зняття з карти",
+      "usedmoney": "Використано грошей",
+      "count": "Кількість операцій",
+      "moneyearned": "Грошей зароблено",
+      "profitability": "Прибутковість",
+      "graphsPone": "Кошти, що пройшли через операції.",
+      "graphsPtwo": "Кошти, зароблені банком за одиницю операції.",
+      "diagramPone": "Співвідношення коштів, які пройшли через операції.",
+      "diagramPtwo": "Співвідношення зароблених банком коштів за одиницю операції."
+    }
+  },
   "users": [
     {
       "phone": "555555555555",
       "password": "ffffffffffffffffff",
       "id": 1,
+      "access": "user",
       "blocked": false,
-      "access": "user"
+      "card": {
+        "name": "misha",
+        "number": "4111222233334444",
+        "expiry": "12/03",
+        "cvc": "123"
+      }
     },
     {
       "phone": "666666666666",
       "password": "ііііііііііііііііі",
       "id": 2,
-      "blocked": false,
-      "access": "user"
+      "access": "user",
+      "card": {
+        "name": "інокентій",
+        "number": "4088666677778888",
+        "expiry": "10/03",
+        "cvc": "456"
+      },
+      "blocked": false
     },
     {
-      "phone": "999999999999",
-      "password": "5555555555555555555",
+      "phone": "012354678910",
+      "password": "абобабубабкакбп",
       "id": 3,
-      "blocked": false,
-      "access": "user"
+      "card": {
+        "name": "migal",
+        "number": "4566789879849897",
+        "expiry": "1244",
+        "cvc": "123"
+      }
     },
     {
-      "phone": "9999999999988888",
-      "password": "88888888888888888888888",
-      "id": 4,
-      "blocked": false,
-      "access": "user"
+      "phone": "09722233344550",
+      "password": "lalabobohehehaha",
+      "id": 4
     },
     {
-      "phone": "0000000111111111",
-      "password": "8787878787878787878",
-      "id": 5,
-      "blocked": false,
-      "access": "user"
+      "phone": "0884568476415635",
+      "password": "15347651354684532",
+      "id": 5
     },
     {
-      "phone": "595959595955",
-      "password": "959595595",
-      "id": 6,
-      "blocked": false,
-      "access": "user"
+      "phone": "50683051603520",
+      "password": "fokg'j'gerkwreogkr",
+      "id": 6
     },
     {
-      "phone": "777888999000",
-      "password": "11111111111111111111",
+      "phone": "050341534015215",
+      "password": "зджблщдлжлхждд",
       "id": 7,
-      "blocked": false,
-      "access": "user"
+      "card": {
+        "name": "тарас",
+        "number": "4325000002226333",
+        "expiry": "1111",
+        "cvc": "0124"
+      }
     },
     {
-      "phone": "0972114554",
-      "password": "123456789",
+      "phone": "022555555566666",
+      "password": "44445555557777777",
       "id": 8,
-      "blocked": false,
-      "access": "user"
+      "card": {
+        "name": "10000798",
+        "number": "4541321111000097",
+        "expiry": "0512",
+        "cvc": "366"
+      }
     },
     {
-      "phone": "0972889904",
-      "password": "123456789",
-      "id": 9,
-      "blocked": false,
-      "access": "user"
+      "phone": "44843543543484545",
+      "password": "глрлорлргрлгрл",
+      "id": 9
     },
     {
-      "phone": "0123456789",
-      "password": "1234567",
-      "id": 10,
-      "blocked": false,
-      "access": "user"
+      "phone": "22222222222233",
+      "password": "00000011111111111",
+      "id": 10
+    },
+    {
+      "phone": "222222222221111111",
+      "password": "0000000111222222334444",
+      "id": 11
+    },
+    {
+      "phone": "111112222222222222222",
+      "password": "000000000000000000000",
+      "id": 12
+    },
+    {
+      "phone": "11111122222211111",
+      "password": "0000000000000000",
+      "id": 13,
+      "card": {
+        "name": "pop",
+        "number": "4444333333333111",
+        "expiry": "1233",
+        "cvc": "123"
+      }
+    },
+    {
+      "phone": "3333333333333333",
+      "password": "22222222222222222222",
+      "id": 14,
+      "card": {
+        "name": "amars",
+        "number": "5111111111122222",
+        "expiry": "1222",
+        "cvc": "320"
+      }
+    },
+    {
+      "phone": "555555555555555",
+      "password": "11111111111111111",
+      "id": 15,
+      "card": {
+        "name": "lolka",
+        "number": "4447777777777777",
+        "expiry": "1123",
+        "cvc": "999"
+      }
+    },
+    {
+      "phone": "1213213121213121",
+      "password": "13212132132123",
+      "id": 16,
+      "card": {
+        "name": "kapusta",
+        "number": "1800010324551111",
+        "expiry": "0127",
+        "cvc": "978"
+      }
+    },
+    {
+      "phone": "21111111111111111111",
+      "password": "22222222222222222",
+      "id": 17,
+      "card": {
+        "name": "oleg",
+        "number": "4444444444444999",
+        "expiry": "0224",
+        "cvc": "123"
+      }
+    },
+    {
+      "phone": "333333333333333333",
+      "password": "000000000000000",
+      "id": 18
+    },
+    {
+      "phone": "7777777777777",
+      "password": "2222222222222",
+      "id": 19,
+      "card": {
+        "number": "5555555555555551",
+        "expiry": "2245",
+        "cvc": "321"
+      },
+      "balance": 500
+    },
+    {
+      "phone": "5555544444455555",
+      "password": "33333333333333333",
+      "id": 20,
+      "card": {
+        "name": "uhuhu",
+        "number": "4534444444444444",
+        "expiry": "1122",
+        "cvc": "123"
+      },
+      "balance": 500
+    },
+    {
+      "phone": "887787787878787",
+      "password": "jjjjjjjjjjjj",
+      "id": 21,
+      "card": {
+        "name": "poliak",
+        "number": "5011111111111111",
+        "expiry": "1234",
+        "cvc": "311"
+      }
+    },
+    {
+      "phone": "0555554444446666",
+      "password": "qdqwdqwdwdqwdwqd",
+      "id": 22,
+      "card": {
+        "name": "potap",
+        "number": "6666666666666667",
+        "expiry": "1213",
+        "cvc": "123"
+      }
+    },
+    {
+      "phone": "097543521112201",
+      "password": "oalalalalalalla",
+      "id": 23,
+      "card": {
+        "name": "mikyta",
+        "number": "4486845151223333",
+        "expiry": "0709",
+        "cvc": "921"
+      }
+    },
+    {
+      "phone": "977777777999999",
+      "password": "00001111122222233",
+      "id": 24,
+      "card": {
+        "name": "flamingo ivanovich",
+        "number": "5555555555555555",
+        "expiry": "0517",
+        "cvc": "777"
+      }
+    },
+    {
+      "phone": "0213475974213848",
+      "password": "testooooooooooo",
+      "id": 25,
+      "card": {
+        "number": "4521344997123845",
+        "expiry": "2205",
+        "cvc": "351"
+      },
+      "balance": 7620
+    },
+    {
+      "phone": "1111111111111111",
+      "password": "00000000000000000",
+      "id": 26,
+      "card": {
+        "number": "4531078888844443",
+        "expiry": "1122",
+        "cvc": "321"
+      },
+      "balance": 40000
+    }
+  ],
+  "operations": [
+    {
+      "type": "transfer",
+      "used_money": 1100,
+      "money_earned": 155,
+      "count": 11
+    },
+    {
+      "type": "phone top-up",
+      "used_money": 2400,
+      "money_earned": 260,
+      "count": 22
+    },
+    {
+      "type": "deposit",
+      "used_money": 3200,
+      "money_earned": 360,
+      "count": 36
+    },
+    {
+      "type": "withdraw",
+      "used_money": 4600,
+      "money_earned": 500,
+      "count": 48
     }
   ]
 }

@@ -7,6 +7,21 @@ body {
   color: #fff;
 }
 
+.language-selector {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  margin-left: auto; 
+}
+
+.language-selector select {
+  background-color: rgba(48, 22, 4, 0.714); 
+  border: 2px solid #9b852c;
+  border-radius: 5px;
+  padding: 5px;
+  color: #fff;
+}
+
 .login-container {
   max-width: 400px;
   margin: 100px auto;
