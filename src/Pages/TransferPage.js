@@ -1,7 +1,7 @@
+import '../styles/transfer.css'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/transfer.css'
 
 const TransferPage = () => {
   const [transferData, setTransferData] = useState({
@@ -17,6 +17,7 @@ const TransferPage = () => {
     if (loggedInUser) {
       setUserData(JSON.parse(loggedInUser));
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleInputChange = (event) => {
@@ -25,6 +26,7 @@ const TransferPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (!userData) {
       alert("Please log in to continue.");
       return;
@@ -56,9 +58,18 @@ const TransferPage = () => {
       };
       await axios.put(`http://localhost:8000/users/${userData.id}`, updatedSender);
 
+      const transactionRecord = {
+        senderCardNumber: userData.card.number,
+        recipientCardNumber: transferData.recipientCardNumber,
+        amount: transferData.amount,
+        date: new Date().toISOString().split('T')[0] 
+      };
+
+      await axios.post('http://localhost:8000/transactions', transactionRecord);
+
       localStorage.setItem('user', JSON.stringify(updatedSender));
       alert("Transfer successful.");
-      navigate('/home');
+      navigate('/home'); 
     } catch (error) {
       console.error('Error during transfer:', error);
       alert('Error during transfer');
@@ -95,7 +106,7 @@ const TransferPage = () => {
           onChange={handleInputChange}
           required
         />
-        <button type="submit" className='transfer-button' >Transfer</button>
+        <button type="submit" className='transfer-button'>Transfer</button>
       </form>
     </div>
   );

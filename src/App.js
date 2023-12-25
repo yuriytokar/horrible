@@ -9,6 +9,7 @@ import Home from './Pages/home';
 import './styles/App.css'; 
 import PaymentForm from './Pages/PaymentForm';
 import TransferPage from './Pages/TransferPage';
+import TransactionsPage from './Pages/TransactionsPage';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/payment" element={<PaymentForm/>} />
         <Route path="/transfer" element={<TransferPage />} />
+        <Route path="/transactions" element={<TransactionsPage />} />
         <Route path="/" element={<LoginPage />} />
       </Routes>
     </Router>

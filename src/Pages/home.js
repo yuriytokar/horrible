@@ -26,6 +26,10 @@ const HomePage = () => {
     navigate('/transfer'); 
   };
 
+  const handleViewTransactions = () => {
+    navigate('/transactions');
+  };
+
 
   return (
     <div className="home-page-container">
@@ -40,7 +44,7 @@ const HomePage = () => {
             focused={null}
           />
           <button onClick={handleTransfer} className="transfer-buttn">Transfer Money</button>
-
+          <button onClick={handleViewTransactions}className="transactions">View Transaction History</button>
           <button onClick={handleLogout} className="logout-button">Logout</button>
         </div>
       )}

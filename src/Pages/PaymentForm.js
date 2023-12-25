@@ -19,7 +19,13 @@ const PaymentForm = () => {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
-    if (loggedInUser) {
+    const paymentSubmitted = localStorage.getItem('paymentSubmitted');
+
+    if (!loggedInUser) {
+      navigate('/');
+    } else if (paymentSubmitted) {
+      navigate('/home');
+    } else {
       const foundUser = JSON.parse(loggedInUser);
       setUserData(foundUser);
       setState({
@@ -28,8 +34,6 @@ const PaymentForm = () => {
         cvc: foundUser.card?.cvc || '',
         balance: foundUser.balance || '0.00',
       });
-    } else {
-      navigate('/');
     }
   }, [navigate]);
 
@@ -45,7 +49,6 @@ const PaymentForm = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    // Перевірка на унікальність номера карти
     if (state.number !== userData.card?.number) {
       const response = await axios.get(`http://localhost:8000/users?card.number=${state.number}`);
       if (response.data.length > 0) {
@@ -67,6 +70,7 @@ const PaymentForm = () => {
     try {
       await axios.put(`http://localhost:8000/users/${userData.id}`, updatedUserData);
       localStorage.setItem('user', JSON.stringify(updatedUserData));
+      localStorage.setItem('paymentSubmitted', 'true');
       navigate('/home');
     } catch (error) {
       console.error('Error updating user data:', error);
