@@ -18,7 +18,11 @@
   }
   
   .transfer-buttn {
-    margin-left: 24.5%;
+    margin-left: 27.5%;
+    margin-top: 20px;
+  }
+  .transactions{
+    margin-left: 20%;
     margin-top: 20px;
   }
   .logout-button {
