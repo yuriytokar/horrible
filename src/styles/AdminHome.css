@@ -97,6 +97,8 @@ button:hover {
   color: white;
   border: none;
   cursor: pointer;
+  margin-left: 10px;
+  width: 100px;
 }
 
 .user-status button:hover {

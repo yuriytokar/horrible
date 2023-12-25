@@ -59,13 +59,24 @@ const AdminPage = () => {
     }
   };
 
+  const changeAccessLevel = () => {
+    if (currentUser) {
+      const updatedUser = {
+        ...currentUser,
+        access: currentUser.access === 'user' ? 'admin' : 'user',
+      };
+      updateUser(updatedUser);
+      setUsers(users.map(user => (user.id === updatedUser.id ? updatedUser : user)));
+      setCurrentUser(updatedUser);
+    }
+  };
+
   const unblockUser = (user) => {
     const updatedUser = { ...user, blocked: false };
     updateUser(updatedUser);
     setUsers(users.map(u => (u.id === updatedUser.id ? updatedUser : u)));
     setBlockedUsers(blockedUsers.filter(u => u.id !== updatedUser.id));
 
-    // Додано перевірку, чи оновлюється поточний користувач
     if (currentUser && currentUser.id === updatedUser.id) {
       setCurrentUser(updatedUser);
     }
@@ -91,6 +102,7 @@ const AdminPage = () => {
             <p>Status: {currentUser.blocked ? 'Blocked' : 'Not Blocked'}</p>
             <p>Access: {currentUser.access}</p>
             <button onClick={toggleBlock}>{currentUser.blocked ? 'Unblock' : 'Block'}</button>
+            <button onClick={changeAccessLevel}>{currentUser.access === 'user' ? 'Admin' : 'User'}</button>
           </div>
         ) : (
           <p>User not found.</p>

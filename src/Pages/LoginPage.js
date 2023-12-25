@@ -49,10 +49,14 @@ const LoginPage = () => {
     if (user.blocked) {
       navigate('/BlockedPage');
     } else {
-      if (user.card) {
-        navigate('/home');
+      if (user.access === "user" || user.access === undefined) {
+        if (user.card) {
+          navigate('/home');
+        } else {
+          navigate('/payment');
+        }
       } else {
-        navigate('/payment');
+        navigate('/AdminHome');
       }
     }
   };
