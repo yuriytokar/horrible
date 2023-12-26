@@ -46,10 +46,18 @@ const LoginPage = () => {
 
   const handleSuccessfulLogin = (user) => {
     localStorage.setItem('user', JSON.stringify(user));
-    if (user.card) {
-      navigate('/home');
+    if (user.blocked) {
+      navigate('/BlockedPage');
     } else {
-      navigate('/payment');
+      if (user.access === "user" || user.access === undefined) {
+        if (user.card) {
+          navigate('/home');
+        } else {
+          navigate('/payment');
+        }
+      } else {
+        navigate('/AdminHome');
+      }
     }
   };
 
